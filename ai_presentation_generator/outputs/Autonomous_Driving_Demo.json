@@ -1,0 +1,146 @@
+{
+  "id": "pres_demo_autonomous_driving",
+  "topic": "Autonomous Driving and Computer Vision",
+  "objective": "Analyze deep neural perception, LiDAR sensor fusion, and real-time path planning in self-driving vehicles",
+  "audience": "Engineering Faculty",
+  "difficulty": "Advanced",
+  "presentation_type": "Technical Seminar",
+  "num_slides": 10,
+  "duration": 15,
+  "domain": "Deep Learning / Technology",
+  "points_refined": 4,
+  "redundant_points_detected": 4,
+  "created_at": "Production Ready",
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "Introduction to Autonomous Driving and Computer Vision",
+      "purpose": "Introduce foundational autonomy taxonomy, operational design domains, and perception pipelines.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "SAE Level 0 to Level 5 autonomy spectrum and real-time compute requirements.",
+        "Decomposition of autonomy stack: perception, localization, state estimation, and path execution.",
+        "Critical role of convolutional and transformer backbones operating on 360-degree camera feeds."
+      ],
+      "case_study": "Waymo commercial robotaxi deployment accumulating over 20 million driverless commercial miles with safety benchmark parity.",
+      "speaker_notes": "Introduce the seminar scope covering edge computer vision, multimodal sensor fusion, and latency bounds for autonomous systems."
+    },
+    {
+      "slide_number": 2,
+      "title": "Sensor Modalities & Multi-Modal Perception",
+      "purpose": "Examine complementary physical sensor characteristics and signal acquisition.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "High-resolution CMOS image sensors providing dense RGB texture and semantic sign identification.",
+        "Frequency-modulated continuous-wave (FMCW) LiDAR yielding direct 3D point cloud coordinate geometries.",
+        "Millimeter-wave radar providing all-weather Doppler velocity measurements and obstruction penetration."
+      ],
+      "case_study": "Comparative evaluation of Tesla camera-only vision approach vs. Waymo heterogeneous LiDAR-radar-vision architecture in adverse fog.",
+      "speaker_notes": "Explain trade-offs between dense semantic texture from RGB cameras and precise metric depth from rotating LiDAR scanners."
+    },
+    {
+      "slide_number": 3,
+      "title": "Deep Neural Perception & 3D Object Detection",
+      "purpose": "Break down state-of-the-art vision architectures mapping raw sensors to bounding boxes.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Bird's-Eye-View (BEV) perception transformers projecting multi-camera perspective images into unified ground planes.",
+        "PointNet and VoxelNet neural architectures directly processing sparse unstructured 3D LiDAR point clouds.",
+        "Simultaneous multi-task networks outputting 3D bounding boxes, semantic lane topologies, and road drivability masks."
+      ],
+      "case_study": "BEVFormer spatial-temporal cross-attention architecture outperforming prior LiDAR baselines by 4.2 points on the nuScenes benchmark.",
+      "speaker_notes": "Point out how transformer cross-attention mechanisms seamlessly resolve camera perspective depth ambiguities into top-down representations."
+    },
+    {
+      "slide_number": 4,
+      "title": "Sensor Fusion Architectures: Early vs. Late Fusion",
+      "purpose": "Analyze mathematical representations for combining disparate sensor streams.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Early fusion combining raw calibrated camera pixels and projected LiDAR depth maps prior to feature extraction.",
+        "Late fusion consolidating high-level candidate object detections via Bayesian Kalman filtering.",
+        "Deep middle fusion utilizing transformer attention to exchange cross-modal feature embeddings dynamically."
+      ],
+      "case_study": "Deployment of middle-fusion architecture on NVIDIA DRIVE Orin compute platforms achieving 30 FPS deterministic inference.",
+      "speaker_notes": "Walk the audience through the trade-offs: early fusion is information-rich but sensitive to calibration jitter; late fusion is robust but discards weak signal synergy."
+    },
+    {
+      "slide_number": 5,
+      "title": "Simultaneous Localization and Mapping (SLAM)",
+      "purpose": "Examine high-definition spatial mapping and centimeter-accurate vehicle positioning.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Visual-Inertial Odometry (VIO) coupling feature tracking with high-frequency IMU accelerometer updates.",
+        "HD map vector representations encoding centimeter-precision lane boundaries, intersection rules, and signal heads.",
+        "LiDAR scan matching against pre-built surfel maps maintaining localization in GNSS-denied environments."
+      ],
+      "case_study": "Centimeter-accurate localization sustained through GPS-denied highway tunnels using LiDAR point cloud normal distribution transforms.",
+      "speaker_notes": "Detail how urban street canyons cause GNSS multipath errors, necessitating point-cloud scan matching against pre-computed HD maps."
+    },
+    {
+      "slide_number": 6,
+      "title": "Motion Prediction & Agent Trajectory Forecasting",
+      "purpose": "Analyze probabilistic trajectory forecasting for surrounding dynamic agents.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Recurrent graph neural networks modeling interactive lane-vehicle and vehicle-pedestrian spatio-temporal dynamics.",
+        "Multi-modal trajectory distributions capturing divergent intention hypotheses (e.g. yield vs. turn).",
+        "Social pooling mechanisms modeling cooperative multi-agent interactions at complex four-way intersections."
+      ],
+      "case_study": "Waymo TNT (Target-driven Trajectory Prediction) accurately predicting erratic pedestrian lane-crossing maneuvers 3 seconds prior to divergence.",
+      "speaker_notes": "Emphasize that motion forecasting cannot produce a single deterministic line; it must output multi-modal Gaussian distributions over potential futures."
+    },
+    {
+      "slide_number": 7,
+      "title": "Path Planning, Behavioral Decision Making & Control",
+      "purpose": "Explore real-time trajectory optimization and collision avoidance controllers.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Hierarchical motion planners splitting long-horizon mission routing from short-horizon collision avoidance.",
+        "Model Predictive Control (MPC) optimizing vehicle steering angle, acceleration, and jerk boundaries.",
+        "End-to-end neural motion planning models directly mapping sensor representations to trajectory waypoints."
+      ],
+      "case_study": "Real-time non-linear Model Predictive Control executing evasive double-lane change maneuvers with zero tire slip saturation.",
+      "speaker_notes": "Contrast rule-based cost-function optimizers against emerging differentiable end-to-end driving models."
+    },
+    {
+      "slide_number": 8,
+      "title": "Edge Compute Hardware & Latency Budgets",
+      "purpose": "Examine embedded inference platforms, safety watchdogs, and deterministic execution.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Automotive SoC architectures (NVIDIA Orin, Tesla FSD Chip) delivering 250+ INT8/FP16 Deep Learning TOPS.",
+        "Strict 100-millisecond end-to-end latency budget from photon capture to actuator brake execution.",
+        "ASIL-D safety integrity standards requiring redundant lockstep CPUs and independent fallback trajectory systems."
+      ],
+      "case_study": "Dual-redundant automotive system architecture automatically isolating primary SoC thermal faults within 8 milliseconds.",
+      "speaker_notes": "Remind the faculty audience that a 100ms compute delay at 100 km/h corresponds to 2.8 meters of unguided vehicle displacement."
+    },
+    {
+      "slide_number": 9,
+      "title": "Edge Cases, OOD Scenarios & Safety Verification",
+      "purpose": "Analyze long-tail safety distribution and simulation validation paradigms.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "The long-tail distribution challenge: emergency vehicles, road debris, construction detours, and adverse glare.",
+        "Out-of-distribution (OOD) neural uncertainty estimation quantifying model epistemic confidence.",
+        "Photorealistic neural radiance field (NeRF) simulation running billions of virtual stress-test miles."
+      ],
+      "case_study": "Generative world models synthesizing adversarial rain, blinding glare, and tumbling debris to validate vision robustness in simulation.",
+      "speaker_notes": "Explain that autonomous driving safety is dominated by the rare long-tail scenarios occurring once every million miles."
+    },
+    {
+      "slide_number": 10,
+      "title": "Conclusion & Next-Generation Autonomous Horizons",
+      "purpose": "Synthesize architectural principles and explore foundation models in autonomy.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Convergence toward unified end-to-end foundation models connecting vision-language reasoning to vehicle actuation.",
+        "Transition from HD-map dependent geofenced robotaxis to mapless generalized urban perception.",
+        "Regulatory certification frameworks establishing ISO 26262 and SOTIF safety validation benchmarks worldwide."
+      ],
+      "case_study": "Open-source benchmark initiatives standardizing autonomous vehicle safety validation protocols across international transport agencies.",
+      "speaker_notes": "Conclude the presentation by summarizing the ultimate goal: deploying verifiable, generalizable vision agents that eliminate preventable traffic fatalities."
+    }
+  ]
+}

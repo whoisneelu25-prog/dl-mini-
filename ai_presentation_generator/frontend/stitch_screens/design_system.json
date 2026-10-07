@@ -1,0 +1,163 @@
+{
+  "displayName": "Academic Neural Studio",
+  "styleGuidelines": "## Brand & Style\n\nThe design system marries rigorous academic inquiry with high-velocity AI SaaS product design. Designed specifically for deep learning researchers, engineering students, and NLP practitioners, the interface eschews the trope of generic conversational chatbots. Instead, it positions itself as an analytical, structured workspace\u2014a scientific workbench where model architectures, inference pipelines, and synthesized slide outputs are transparent, controllable, and visually authoritative.\n\n### Design Movement & Aesthetic\n- **Synthesized Precision (Modern Technical Minimalism + Subtle Luminescence):** High-density functional layouts grounded in stark, ultra-clean neutral surfaces. Architectural discipline is emphasized through structural alignment, meticulous typographic hierarchy, and razor-sharp borders.\n- **Controlled Neural Accents:** Energetic electric indigos and violets are deployed sparingly to indicate computation, active tensor transformation, and inference states rather than gratuitous decoration.\n- **Intellectual Clarity:** The atmosphere feels like an advanced laboratory console: measured, highly readable, deterministic, and free of noisy micro-interactions.\n\n## Layout & Spacing\n\nThe spatial foundation relies on an explicit 8pt baseline grid with an adaptive, multi-tier layout structure.\n\n### Layout System\n- **Desktop (>= 1280px):** 12-column fluid grid with fixed outer section margins (`margin: 2rem`) and consistent gutters (`gutter: 1.5rem`). Primary layout adopts a 3-pane scientific architecture:\n  1. *Left Configuration Panel (3 cols):* Model selector, prompt injection, temperature/top-p sliders, chunk size.\n  2. *Center Pipeline Canvas (6 cols):* Pipeline step execution, extraction graph, expandable slide outline cards.\n  3. *Right Inspector/Preview (3 cols):* Real-time 16:9 rendered slide deck, speaker notes, and token telemetry.\n- **Tablet (768px - 1279px):** 8-column layout. Configuration collapses into an off-canvas drawer; center pipeline and slide preview pivot into a stacked vertical arrangement.\n- **Mobile (< 768px):** 4-column layout with reduced canvas margin (`1rem`). Sequential stepper view replaces simultaneous multi-panel inspection.\n\n## Elevation & Depth\n\nVisual hierarchy is maintained through high-clarity tonal boundaries complemented by diffuse ambient shadows and intentional neural luminescence.\n\n### Elevation Levels\n- **Level 0 (Flat / Canvas):** `background: #F8FAFC`. Zero elevation, pure spatial grounding.\n- **Level 1 (Card / Resting Surface):** `background: #FFFFFF`, border: `1px solid #E2E8F0`, shadow: `0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03)`. Used for default slide cards and control wells.\n- **Level 2 (Active / Hover Surface):** `background: #FFFFFF`, border: `1px solid #CBD5E1`, shadow: `0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04)`. Elevates selected slide sections, active inputs, and interactive cards.\n- **Level 3 (Floating Overlays / Modals):** `background: #FFFFFF`, border: `1px solid #CBD5E1`, shadow: `0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03)`. Applied to hyperparameter inspector flyouts and full-screen presentation decks.\n\n### Neural Luminescence (Compute Glow)\nWhen an element transitions into active transformer inference or embeddings synthesis:\n- Border shifts to `1px solid #6366F1`.\n- Outer glow: `box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 4px 12px rgba(79, 70, 229, 0.1)`.\n\n## Components\n\n### Buttons\n- **Primary Compute Button:** Background `#4F46E5`, text `#FFFFFF`, font `label-md`. Hover: `#4338CA` with subtle glow `0 0 12px rgba(79, 70, 229, 0.35)`. Active: `#3730A3`. Height `40px`, padding `0 1rem`.\n- **Secondary / Outline:** Background `#FFFFFF`, border `1px solid #CBD5E1`, text `#0F172A`. Hover: background `#F8FAFC`, border `#94A3B8`.\n- **Ghost Action:** Background transparent, text `#64748B`. Hover: background `#F1F5F9`, text `#0F172A`.\n\n### Status Badges & Model Chips\n- **Architecture Chip:** Background `#EEF2FF`, border `1px solid #C7D2FE`, text `#4338CA`, font `mono-metric`. Encapsulates model names (`FLAN-T5`, `MiniLM`).\n- **Validated Chip:** Background `#ECFDF5`, border `1px solid #A7F3D0`, text `#065F46`, font `label-sm`.\n- **In-Progress Chip:** Background `#FFFBEB`, border `1px solid #FDE68A`, text `#92400E`, font `label-sm`.\n\n### Pipeline Stepper\n- Horizontal/vertical segmented track consisting of distinct stage nodes:\n  1. *Source Parsing* &rarr; 2. *Chunking & Embedding* &rarr; 3. *Key-Concept Extraction* &rarr; 4. *Slide Generation*.\n- Completed steps display an emerald check badge (`#10B981`).\n- Active step showcases a pulsing indigo border indicator with a `mono-metric` step-time stopwatch.\n\n### Expandable Slide Outline Cards\n- Elevated Level 1 surface with a left vertical accent bar: 3px solid `#E2E8F0` (resting), transitions to `#4F46E5` on selection.\n- Header holds drag handle, slide sequence index (`JetBrains Mono`), slide title, and token count.\n- Expands to reveal extracted bullet points, editable generated speaker notes, and underlying reference chunks.\n\n### Sliders (Hyperparameters)\n- Track: Height `4px`, background `#E2E8F0`, rounded `9999px`.\n- Active Fill: Background `linear-gradient(90deg, #4F46E5, #6366F1)`.\n- Thumb: `18px` circle, background `#FFFFFF`, border `2px solid #4F46E5`, shadow `0 2px 4px rgba(15, 23, 42, 0.15)`. Active grab displays ring glow.\n\n### Form Inputs & Prompts\n- Background `#FFFFFF`, border `1px solid #CBD5E1`, radius `0.5rem`.\n- Focus state: Border `#6366F1`, box-shadow `0 0 0 3px rgba(99, 102, 241, 0.15)`.\n- Placeholder text in `#94A3B8`.",
+  "theme": {
+    "colorMode": "LIGHT",
+    "font": "PLUS_JAKARTA_SANS",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#4f46e5",
+    "headlineFont": "PLUS_JAKARTA_SANS",
+    "bodyFont": "INTER",
+    "labelFont": "JETBRAINS_MONO",
+    "namedColors": {
+      "on_tertiary_container": "#cedbff",
+      "surface_container_lowest": "#ffffff",
+      "surface_container_high": "#e2e7ff",
+      "surface": "#faf8ff",
+      "tertiary_container": "#005cc6",
+      "surface_container": "#eaedff",
+      "secondary_fixed": "#eaddff",
+      "primary": "#3525cd",
+      "surface_tint": "#4d44e3",
+      "on_error": "#ffffff",
+      "primary_container": "#4f46e5",
+      "on_surface": "#131b2e",
+      "on_secondary_fixed": "#25005a",
+      "on_tertiary": "#ffffff",
+      "tertiary_fixed": "#d8e2ff",
+      "background": "#faf8ff",
+      "inverse_surface": "#283044",
+      "on_tertiary_fixed": "#001a42",
+      "inverse_on_surface": "#eef0ff",
+      "on_primary": "#ffffff",
+      "on_primary_container": "#dad7ff",
+      "surface_container_highest": "#dae2fd",
+      "secondary_container": "#8a4cfc",
+      "surface_container_low": "#f2f3ff",
+      "tertiary_fixed_dim": "#adc6ff",
+      "error": "#ba1a1a",
+      "secondary_fixed_dim": "#d2bbff",
+      "surface_variant": "#dae2fd",
+      "primary_fixed": "#e2dfff",
+      "surface_dim": "#d2d9f4",
+      "on_surface_variant": "#464555",
+      "on_secondary_fixed_variant": "#5a00c6",
+      "on_tertiary_fixed_variant": "#004395",
+      "inverse_primary": "#c3c0ff",
+      "on_secondary": "#ffffff",
+      "on_background": "#131b2e",
+      "secondary": "#712ae2",
+      "error_container": "#ffdad6",
+      "primary_fixed_dim": "#c3c0ff",
+      "on_primary_fixed_variant": "#3323cc",
+      "outline": "#777587",
+      "tertiary": "#004598",
+      "on_error_container": "#93000a",
+      "on_primary_fixed": "#0f0069",
+      "outline_variant": "#c7c4d8",
+      "on_secondary_container": "#fffbff",
+      "surface_bright": "#faf8ff"
+    },
+    "designMd": "---\nname: Academic Neural Studio\ncolors:\n  surface: '#faf8ff'\n  surface-dim: '#d2d9f4'\n  surface-bright: '#faf8ff'\n  surface-container-lowest: '#ffffff'\n  surface-container-low: '#f2f3ff'\n  surface-container: '#eaedff'\n  surface-container-high: '#e2e7ff'\n  surface-container-highest: '#dae2fd'\n  on-surface: '#131b2e'\n  on-surface-variant: '#464555'\n  inverse-surface: '#283044'\n  inverse-on-surface: '#eef0ff'\n  outline: '#777587'\n  outline-variant: '#c7c4d8'\n  surface-tint: '#4d44e3'\n  primary: '#3525cd'\n  on-primary: '#ffffff'\n  primary-container: '#4f46e5'\n  on-primary-container: '#dad7ff'\n  inverse-primary: '#c3c0ff'\n  secondary: '#712ae2'\n  on-secondary: '#ffffff'\n  secondary-container: '#8a4cfc'\n  on-secondary-container: '#fffbff'\n  tertiary: '#004598'\n  on-tertiary: '#ffffff'\n  tertiary-container: '#005cc6'\n  on-tertiary-container: '#cedbff'\n  error: '#ba1a1a'\n  on-error: '#ffffff'\n  error-container: '#ffdad6'\n  on-error-container: '#93000a'\n  primary-fixed: '#e2dfff'\n  primary-fixed-dim: '#c3c0ff'\n  on-primary-fixed: '#0f0069'\n  on-primary-fixed-variant: '#3323cc'\n  secondary-fixed: '#eaddff'\n  secondary-fixed-dim: '#d2bbff'\n  on-secondary-fixed: '#25005a'\n  on-secondary-fixed-variant: '#5a00c6'\n  tertiary-fixed: '#d8e2ff'\n  tertiary-fixed-dim: '#adc6ff'\n  on-tertiary-fixed: '#001a42'\n  on-tertiary-fixed-variant: '#004395'\n  background: '#faf8ff'\n  on-background: '#131b2e'\n  surface-variant: '#dae2fd'\ntypography:\n  display:\n    fontFamily: Plus Jakarta Sans\n    fontSize: 2.5rem\n    fontWeight: '700'\n    lineHeight: 3rem\n    letterSpacing: -0.03em\n  headline-lg:\n    fontFamily: Plus Jakarta Sans\n    fontSize: 2rem\n    fontWeight: '600'\n    lineHeight: 2.5rem\n    letterSpacing: -0.025em\n  headline-lg-mobile:\n    fontFamily: Plus Jakarta Sans\n    fontSize: 1.5rem\n    fontWeight: '600'\n    lineHeight: 2rem\n    letterSpacing: -0.02em\n  headline-md:\n    fontFamily: Plus Jakarta Sans\n    fontSize: 1.375rem\n    fontWeight: '600'\n    lineHeight: 1.875rem\n    letterSpacing: -0.02em\n  headline-sm:\n    fontFamily: Plus Jakarta Sans\n    fontSize: 1.125rem\n    fontWeight: '600'\n    lineHeight: 1.625rem\n    letterSpacing: -0.015em\n  body-lg:\n    fontFamily: Inter\n    fontSize: 1rem\n    fontWeight: '400'\n    lineHeight: 1.625rem\n  body-md:\n    fontFamily: Inter\n    fontSize: 0.875rem\n    fontWeight: '400'\n    lineHeight: 1.375rem\n  body-sm:\n    fontFamily: Inter\n    fontSize: 0.8125rem\n    fontWeight: '400'\n    lineHeight: 1.25rem\n  label-md:\n    fontFamily: Inter\n    fontSize: 0.875rem\n    fontWeight: '500'\n    lineHeight: 1.25rem\n    letterSpacing: -0.005em\n  label-sm:\n    fontFamily: Inter\n    fontSize: 0.75rem\n    fontWeight: '500'\n    lineHeight: 1rem\n    letterSpacing: 0.01em\n  mono-code:\n    fontFamily: JetBrains Mono\n    fontSize: 0.8125rem\n    fontWeight: '400'\n    lineHeight: 1.25rem\n  mono-metric:\n    fontFamily: JetBrains Mono\n    fontSize: 0.75rem\n    fontWeight: '500'\n    lineHeight: 1rem\n    letterSpacing: 0.02em\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  gutter: 1.5rem\n  margin: 2rem\n  space-xs: 0.25rem\n  space-sm: 0.5rem\n  space-md: 1rem\n  space-lg: 1.5rem\n  space-xl: 2.5rem\n---\n\n## Brand & Style\n\nThe design system marries rigorous academic inquiry with high-velocity AI SaaS product design. Designed specifically for deep learning researchers, engineering students, and NLP practitioners, the interface eschews the trope of generic conversational chatbots. Instead, it positions itself as an analytical, structured workspace\u2014a scientific workbench where model architectures, inference pipelines, and synthesized slide outputs are transparent, controllable, and visually authoritative.\n\n### Design Movement & Aesthetic\n- **Synthesized Precision (Modern Technical Minimalism + Subtle Luminescence):** High-density functional layouts grounded in stark, ultra-clean neutral surfaces. Architectural discipline is emphasized through structural alignment, meticulous typographic hierarchy, and razor-sharp borders.\n- **Controlled Neural Accents:** Energetic electric indigos and violets are deployed sparingly to indicate computation, active tensor transformation, and inference states rather than gratuitous decoration.\n- **Intellectual Clarity:** The atmosphere feels like an advanced laboratory console: measured, highly readable, deterministic, and free of noisy micro-interactions.\n\n## Colors\n\nThe palette balances clinical legibility with luminous computational accents, using cold slates and electric vectors.\n\n### Surface Architecture\n- **Base Canvas (`#F8FAFC`):** Cool, clinical backdrop that eliminates eye strain while maintaining maximum contrast against foreground cards.\n- **Surface Elevation 1 (`#FFFFFF`):** High-clarity white for active cards, inspector panels, slide preview frames, and modal dialogs.\n- **Surface Subdued (`#F1F5F9`):** Recessed containers, table headers, code blocks, and parameter input wells.\n\n### Structural Ink\n- **Primary Ink (`#0F172A`):** Deep navy near-black providing maximum optical weight for headlines, primary values, and dominant data points.\n- **Secondary Ink (`#334155`):** Grounded slate for body copy, parameter labels, and structural metadata.\n- **Muted Ink (`#64748B`):** Restrained slate for helper copy, deactivated tabs, and technical descriptions.\n- **Borders & Dividers (`#E2E8F0`, `#CBD5E1`):** Precision 1px demarcations establishing container bounds without visual friction.\n\n### Neural Spectrum (Action & Compute)\n- **Primary Indigo (`#4F46E5`):** Core interactive states, primary CTAs, and active stepper indicators.\n- **Model Electric Indigo (`#6366F1`):** Dynamic computation glows, active inference badges, and slider tracks.\n- **Deep Violet (`#7C3AED`):** Semantic NLP operations, dense embedding cluster cues, and secondary logic controls.\n- **Vector Blue (`#3B82F6`):** Transformer attention weights, document ingest status, and secondary links.\n\n### System Verification & Feedback\n- **Emerald Green (`#10B981`):** Validated states, cached embeddings ready, pipeline step completion, and slide export confirmation.\n- **Amber Warning (`#F59E0B`):** Token limit warnings, dynamic summarization in-progress, and quantization caveats.\n- **Crimson Error (`#EF4444`):** Out-of-memory errors, invalid regex schemas, and inference timeouts.\n\n## Typography\n\nTypographic structure balances conversational clarity against computational precision. \n\n### Typographic Roles\n- **Display & Headlines (`Plus Jakarta Sans`):** Selected for its crisp geometric proportions and confident presence. Used for slide titles, dashboard module headers, and pipeline step titles. Negative letter-spacing produces a clean, bespoke SaaS feel.\n- **Body & Controls (`Inter`):** Deployed for high-density reading tasks, parameter sliders, generated slide scripts, and long-form research synthesis. Neutral x-height ensures sustained readability.\n- **Model Metadata & Parameter Values (`JetBrains Mono`):** Dedicated exclusively to algorithmic references, vector dimensions (`384D`), model identifiers (`FLAN-T5-base`, `all-MiniLM-L6-v2`), temperature readouts, latency meters, and JSON payload inspect trees.\n\n## Layout & Spacing\n\nThe spatial foundation relies on an explicit 8pt baseline grid with an adaptive, multi-tier layout structure.\n\n### Layout System\n- **Desktop (>= 1280px):** 12-column fluid grid with fixed outer section margins (`margin: 2rem`) and consistent gutters (`gutter: 1.5rem`). Primary layout adopts a 3-pane scientific architecture:\n  1. *Left Configuration Panel (3 cols):* Model selector, prompt injection, temperature/top-p sliders, chunk size.\n  2. *Center Pipeline Canvas (6 cols):* Pipeline step execution, extraction graph, expandable slide outline cards.\n  3. *Right Inspector/Preview (3 cols):* Real-time 16:9 rendered slide deck, speaker notes, and token telemetry.\n- **Tablet (768px - 1279px):** 8-column layout. Configuration collapses into an off-canvas drawer; center pipeline and slide preview pivot into a stacked vertical arrangement.\n- **Mobile (< 768px):** 4-column layout with reduced canvas margin (`1rem`). Sequential stepper view replaces simultaneous multi-panel inspection.\n\n## Elevation & Depth\n\nVisual hierarchy is maintained through high-clarity tonal boundaries complemented by diffuse ambient shadows and intentional neural luminescence.\n\n### Elevation Levels\n- **Level 0 (Flat / Canvas):** `background: #F8FAFC`. Zero elevation, pure spatial grounding.\n- **Level 1 (Card / Resting Surface):** `background: #FFFFFF`, border: `1px solid #E2E8F0`, shadow: `0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03)`. Used for default slide cards and control wells.\n- **Level 2 (Active / Hover Surface):** `background: #FFFFFF`, border: `1px solid #CBD5E1`, shadow: `0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04)`. Elevates selected slide sections, active inputs, and interactive cards.\n- **Level 3 (Floating Overlays / Modals):** `background: #FFFFFF`, border: `1px solid #CBD5E1`, shadow: `0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03)`. Applied to hyperparameter inspector flyouts and full-screen presentation decks.\n\n### Neural Luminescence (Compute Glow)\nWhen an element transitions into active transformer inference or embeddings synthesis:\n- Border shifts to `1px solid #6366F1`.\n- Outer glow: `box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 4px 12px rgba(79, 70, 229, 0.1)`.\n\n## Shapes\n\nThe design uses an intentional, medium curvature scale (`roundedness: 2`) that softens technical interfaces without appearing toy-like or consumer-casual.\n\n### Geometry Specifications\n- **Base Components (`0.5rem / 8px`):** Standard buttons, text inputs, parameter sliders, chip tags, and dropdown items.\n- **Structural Modules (`1rem / 16px`):** Slide outline cards, stage progression panels, code inspector containers, and presentation viewport containers.\n- **Outer Shells (`1.5rem / 24px`):** Main application modals, slide drag-and-drop ingestion zones, and floating action pods.\n- **Micro Tags & Pills (`9999px`):** Neural status indicators, model identity tags (`FLAN-T5`), and execution timers.\n\n## Components\n\n### Buttons\n- **Primary Compute Button:** Background `#4F46E5`, text `#FFFFFF`, font `label-md`. Hover: `#4338CA` with subtle glow `0 0 12px rgba(79, 70, 229, 0.35)`. Active: `#3730A3`. Height `40px`, padding `0 1rem`.\n- **Secondary / Outline:** Background `#FFFFFF`, border `1px solid #CBD5E1`, text `#0F172A`. Hover: background `#F8FAFC`, border `#94A3B8`.\n- **Ghost Action:** Background transparent, text `#64748B`. Hover: background `#F1F5F9`, text `#0F172A`.\n\n### Status Badges & Model Chips\n- **Architecture Chip:** Background `#EEF2FF`, border `1px solid #C7D2FE`, text `#4338CA`, font `mono-metric`. Encapsulates model names (`FLAN-T5`, `MiniLM`).\n- **Validated Chip:** Background `#ECFDF5`, border `1px solid #A7F3D0`, text `#065F46`, font `label-sm`.\n- **In-Progress Chip:** Background `#FFFBEB`, border `1px solid #FDE68A`, text `#92400E`, font `label-sm`.\n\n### Pipeline Stepper\n- Horizontal/vertical segmented track consisting of distinct stage nodes:\n  1. *Source Parsing* &rarr; 2. *Chunking & Embedding* &rarr; 3. *Key-Concept Extraction* &rarr; 4. *Slide Generation*.\n- Completed steps display an emerald check badge (`#10B981`).\n- Active step showcases a pulsing indigo border indicator with a `mono-metric` step-time stopwatch.\n\n### Expandable Slide Outline Cards\n- Elevated Level 1 surface with a left vertical accent bar: 3px solid `#E2E8F0` (resting), transitions to `#4F46E5` on selection.\n- Header holds drag handle, slide sequence index (`JetBrains Mono`), slide title, and token count.\n- Expands to reveal extracted bullet points, editable generated speaker notes, and underlying reference chunks.\n\n### Sliders (Hyperparameters)\n- Track: Height `4px`, background `#E2E8F0`, rounded `9999px`.\n- Active Fill: Background `linear-gradient(90deg, #4F46E5, #6366F1)`.\n- Thumb: `18px` circle, background `#FFFFFF`, border `2px solid #4F46E5`, shadow `0 2px 4px rgba(15, 23, 42, 0.15)`. Active grab displays ring glow.\n\n### Form Inputs & Prompts\n- Background `#FFFFFF`, border `1px solid #CBD5E1`, radius `0.5rem`.\n- Focus state: Border `#6366F1`, box-shadow `0 0 0 3px rgba(99, 102, 241, 0.15)`.\n- Placeholder text in `#94A3B8`.",
+    "colorVariant": "FIDELITY",
+    "overridePrimaryColor": "#4f46e5",
+    "overrideSecondaryColor": "#7c3aed",
+    "overrideTertiaryColor": "#3b82f6",
+    "overrideNeutralColor": "#0f172a",
+    "spacingScale": 2,
+    "typography": {
+      "body-md": {
+        "fontFamily": "Inter",
+        "fontSize": "0.875rem",
+        "fontWeight": "400",
+        "lineHeight": "1.375rem"
+      },
+      "label-md": {
+        "fontFamily": "Inter",
+        "fontSize": "0.875rem",
+        "fontWeight": "500",
+        "lineHeight": "1.25rem",
+        "letterSpacing": "-0.005em"
+      },
+      "headline-lg": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "2rem",
+        "fontWeight": "600",
+        "lineHeight": "2.5rem",
+        "letterSpacing": "-0.025em"
+      },
+      "headline-sm": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "1.125rem",
+        "fontWeight": "600",
+        "lineHeight": "1.625rem",
+        "letterSpacing": "-0.015em"
+      },
+      "display": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "2.5rem",
+        "fontWeight": "700",
+        "lineHeight": "3rem",
+        "letterSpacing": "-0.03em"
+      },
+      "headline-lg-mobile": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "1.5rem",
+        "fontWeight": "600",
+        "lineHeight": "2rem",
+        "letterSpacing": "-0.02em"
+      },
+      "mono-code": {
+        "fontFamily": "JetBrains Mono",
+        "fontSize": "0.8125rem",
+        "fontWeight": "400",
+        "lineHeight": "1.25rem"
+      },
+      "body-sm": {
+        "fontFamily": "Inter",
+        "fontSize": "0.8125rem",
+        "fontWeight": "400",
+        "lineHeight": "1.25rem"
+      },
+      "mono-metric": {
+        "fontFamily": "JetBrains Mono",
+        "fontSize": "0.75rem",
+        "fontWeight": "500",
+        "lineHeight": "1rem",
+        "letterSpacing": "0.02em"
+      },
+      "label-sm": {
+        "fontFamily": "Inter",
+        "fontSize": "0.75rem",
+        "fontWeight": "500",
+        "lineHeight": "1rem",
+        "letterSpacing": "0.01em"
+      },
+      "body-lg": {
+        "fontFamily": "Inter",
+        "fontSize": "1rem",
+        "fontWeight": "400",
+        "lineHeight": "1.625rem"
+      },
+      "headline-md": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontSize": "1.375rem",
+        "fontWeight": "600",
+        "lineHeight": "1.875rem",
+        "letterSpacing": "-0.02em"
+      }
+    },
+    "spacing": {
+      "space-xl": "2.5rem",
+      "space-xs": "0.25rem",
+      "margin": "2rem",
+      "space-lg": "1.5rem",
+      "gutter": "1.5rem",
+      "space-sm": "0.5rem",
+      "space-md": "1rem"
+    },
+    "headlineFontFamily": "Plus Jakarta Sans",
+    "bodyFontFamily": "Inter",
+    "labelFontFamily": "JetBrains Mono"
+  }
+}

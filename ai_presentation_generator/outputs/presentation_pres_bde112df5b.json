@@ -1,0 +1,202 @@
+{
+  "id": "pres_bde112df5b",
+  "topic": "Artificial Intelligence in Healthcare",
+  "objective": "Explain how AI is transforming healthcare diagnosis and patient care",
+  "audience": "College Students",
+  "difficulty": "Intermediate",
+  "presentation_type": "Technical Seminar",
+  "num_slides": 8,
+  "duration": 12,
+  "domain": "Healthcare",
+  "depth_info": {
+    "technical_depth": "Balanced Applied",
+    "recommended_bullets": 4,
+    "detail_level": "Architectural principles, workflows, and implementation aspects.",
+    "complexity_weight": 1.5,
+    "difficulty": "Intermediate",
+    "num_slides": 8,
+    "pacing_profile": "Evenly distributed across outline modules."
+  },
+  "preprocessed_features": {
+    "token_count": 4,
+    "keyphrases": [
+      "artificial intelligence",
+      "intelligence",
+      "artificial",
+      "healthcare"
+    ],
+    "cleaned_text": "Artificial Intelligence in Healthcare"
+  },
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "Introduction to Artificial Intelligence in Healthcare",
+      "purpose": "Introduce topic, motivation, and fundamental significance.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "The purpose of this presentation is to introduce the core definition and scope of AI in healthcare.",
+        "Key Mechanism & Operational Workflow for Introduction to Artificial Intelligence in Healthcare.",
+        "Practical Benefit & System Impact for Introduction to Artificial Intelligence in Healthcare.",
+        "Introduction to Artificial Intelligence in Healthcare Slide: Introduce topic, motivation, and fundamental significance. Focus: Industry Best Practice & Future Direction."
+      ],
+      "case_study": "Artificial Intelligence in Healthcare - A Case Study.",
+      "speaker_notes": "This presentation is to introduce the core definition and scope of AI in healthcare. Key Mechanism & Operational Workflow."
+    },
+    {
+      "slide_number": 2,
+      "title": "Evolution & Background in Artificial Intelligence in Healthcare",
+      "purpose": "Examine historical context and key milestones leading to modern paradigms.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "The Core Definition and Scope for Evolution & Background in Artificial Intelligence in Healthcare.",
+        "Key Mechanism & Operational Workflow.",
+        "This is a short presentation on the evolution and background in artificial intelligence in healthcare. It focuses on practical benefits and system impact for evolution & background.",
+        "This presentation will focus on the evolution and background in artificial intelligence in healthcare. It will also discuss how AI is changing healthcare diagnosis and patient care."
+      ],
+      "case_study": "Artificial Intelligence in Healthcare: Evolution & Background.",
+      "speaker_notes": "Slide Title: Evolution and Background in Artificial Intelligence in Healthcare Audience: College Students Time Allocation: 1.5 minutes Bullets Summary: The Core Definition and Scope for Evolution & Background - In AI."
+    },
+    {
+      "slide_number": 3,
+      "title": "System Architecture & Framework in Artificial Intelligence in Healthcare",
+      "purpose": "Break down end-to-end architecture, modules, and pipeline components.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "The Core Definition and Scope for System Architecture & Framework in Artificial Intelligence in Healthcare.",
+        "Artificial Intelligence in Healthcare Slide: Key Mechanism & Operational Workflow.",
+        "A brief overview of AI in healthcare.",
+        "AI is transforming healthcare diagnosis and patient care."
+      ],
+      "case_study": "A real-world case study or practical application (1-2 sentences) demonstrating system architecture & framework in artificial intelligence in healthcare.",
+      "speaker_notes": "Slide Title: System Architecture & Framework in Artificial Intelligence in Healthcare Audience: College Students."
+    },
+    {
+      "slide_number": 4,
+      "title": "Methodologies & Algorithms in Artificial Intelligence in Healthcare",
+      "purpose": "Explain core algorithmic techniques, workflows, and processing pipelines.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "The Core Definition and Scope for Methodologies & Algorithms in Artificial Intelligence in Healthcare.",
+        "Key Mechanism & Operational Workflow.",
+        "Practical Benefit and System Impact for Methodologies & Algorithms in Artificial Intelligence.",
+        "AI is transforming healthcare diagnosis and patient care."
+      ],
+      "case_study": "Artificial Intelligence in Healthcare - A Case Study.",
+      "speaker_notes": "Slide Title: Methodologies & Algorithms in Artificial Intelligence in Healthcare Audience: College Students Time Allocation: 1.5 minutes Bullets Summary: The Core Definition and Scope for Methodlogies&Analyte Insights In Artificial Intelligent In Healthcare. Key Mechanism&Operational Workflow. Task: Write concise speaker notes advising the presenter on what to emphasize for college Students."
+    },
+    {
+      "slide_number": 5,
+      "title": "Real-World Applications in Artificial Intelligence in Healthcare",
+      "purpose": "Showcase prominent applied use-cases and industry implementations.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Artificial Intelligence in Healthcare Slideshow.",
+        "Key Mechanism & Operational Workflow for Real-World Applications in Artificial Intelligence in Healthcare.",
+        "Artificial Intelligence in Healthcare Slideshow.",
+        "This presentation will focus on the use of artificial intelligence in healthcare. It will be presented in a technical seminar format. The purpose of this presentation is to provide an overview of how AI is changing healthcare diagnosis and patient care."
+      ],
+      "case_study": "Real-World Applications in Artificial Intelligence in Healthcare.",
+      "speaker_notes": "Highlights Slide Title: Real-World Applications in Artificial Intelligence in Healthcare Audience: College Students Time Allocation: 1.5 minutes Bullets Summary: Core Definition & Scope for Real - World Applications ..."
+    },
+    {
+      "slide_number": 6,
+      "title": "Advantages & System Benefits in Artificial Intelligence in Healthcare",
+      "purpose": "Summarize efficiency, accuracy, scalability, and practical value additions.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "AI is transforming healthcare diagnosis and patient care.",
+        "Key Mechanism & Operational Workflow.",
+        "The benefits and system impact of artificial intelligence in healthcare."
+      ],
+      "case_study": "Artificial Intelligence in Healthcare: Advantages & System Benefits.",
+      "speaker_notes": "Slide: AI is transforming healthcare diagnosis and patient care. Key Mechanism & Operational Workflow. Task: Write concise speaker notes advising the presenter on what to emphasize for College Students."
+    },
+    {
+      "slide_number": 7,
+      "title": "Future Horizons & Emerging Trends",
+      "purpose": "Explore upcoming research directions, next-generation paradigms, and expansion.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "Future Horizons & Emerging Trends.",
+        "Artificial Intelligence in Healthcare Slideshow.",
+        "Fundamental architectural principles and concepts driving future horizons & emerging trends."
+      ],
+      "case_study": "Future Horizons & Emerging Trends in Healthcare.",
+      "speaker_notes": "Presenter notes should be concise and concise, and should include a brief summary of what the speaker is discussing."
+    },
+    {
+      "slide_number": 8,
+      "title": "Conclusion & Future Outlook of Artificial Intelligence in Healthcare",
+      "purpose": "Synthesize core insights, final takeaways, and concluding remarks.",
+      "time_minutes": 1.5,
+      "bullets": [
+        "The Core Definition and Scope for Conclusion & Future Outlook of Artificial Intelligence.",
+        "Key Mechanism & Operational Workflow.",
+        "Artificial Intelligence in Healthcare - Practical Benefit & System Impact.",
+        "AI is transforming healthcare diagnosis and patient care."
+      ],
+      "case_study": "Artificial Intelligence in Healthcare - A Case Study.",
+      "speaker_notes": "Slide Title: Conclusion & Future Outlook of Artificial Intelligence in Healthcare Audience: College Students Time Allocation: 1.5 minutes Bullets Summary: The Core Definition and Scope for Conclusion&Future Outlook Of Artificial Integration. Key Mechanism&Operational Workflow. Task: Write concise speaker notes advising the presenter on what to emphasize for college Students."
+    }
+  ],
+  "redundant_points_detected": 5,
+  "points_refined": 5,
+  "similarity_threshold": 0.88,
+  "refinement_completed": true,
+  "refinement_log": [
+    {
+      "slide_number": 3,
+      "type": "inter-slide",
+      "similarity": 1.0,
+      "original": "Key Mechanism & Operational Workflow.",
+      "refined": "Artificial Intelligence in Healthcare Slide: Key Mechanism & Operational Workflow."
+    },
+    {
+      "slide_number": 4,
+      "type": "inter-slide",
+      "similarity": 1.0,
+      "original": "AI is transforming healthcare diagnosis and patient care.",
+      "refined": "AI is transforming healthcare diagnosis and patient care."
+    },
+    {
+      "slide_number": 5,
+      "type": "inter-slide",
+      "similarity": 0.9012,
+      "original": "Core Definition & Scope for Real-World Applications in Artificial Intelligence in Healthcare.",
+      "refined": "Artificial Intelligence in Healthcare Slideshow."
+    },
+    {
+      "slide_number": 5,
+      "type": "inter-slide",
+      "similarity": 0.8854,
+      "original": "Practical Benefit & System Impact for Real-World Applications in Artificial Intelligence.",
+      "refined": "Artificial Intelligence in Healthcare Slideshow."
+    },
+    {
+      "slide_number": 7,
+      "type": "intra-slide",
+      "similarity": 0.9253,
+      "original": "Future Horizons & Emerging Trends Slide.",
+      "refined": "Artificial Intelligence in Healthcare Slideshow."
+    }
+  ],
+  "created_at": "2026-10-07 17:22:36",
+  "system_info": {
+    "generation_model": "google/flan-t5-base",
+    "generation_type": "Sequence-to-Sequence Pretrained Transformer",
+    "semantic_model": "all-MiniLM-L6-v2",
+    "embedding_dimension": 384,
+    "beam_search": 3,
+    "no_repeat_ngram_size": 2,
+    "similarity_threshold": 0.88,
+    "slide_range": "3–20 slides",
+    "duration_range": "3–60 minutes",
+    "exports": [
+      "PPTX (16:9 Widescreen)",
+      "Markdown",
+      "JSON"
+    ],
+    "execution_device": "MPS",
+    "deep_learning_framework": "PyTorch with Hugging Face Transformers & Sentence Transformers"
+  }
+}

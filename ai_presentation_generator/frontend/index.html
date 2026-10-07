@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PresentAI | Deep Learning Presentation Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand" onclick="navigateTo('landing')">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">PresentAI</span>
+          <span class="brand-sub">Neural Presentation Engine</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" id="nav-btn-landing" onclick="navigateTo('landing')">Overview</button>
+        <button class="nav-btn" id="nav-btn-create" onclick="navigateTo('create')">Create Presentation</button>
+        <button class="nav-btn" id="nav-btn-history" onclick="navigateTo('history')">My Presentations</button>
+        <button class="nav-btn" id="nav-btn-about" onclick="navigateTo('about')">Technology</button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary" onclick="navigateTo('create')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Create Presentation
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="main-content">
+
+    <!-- ==================== SCREEN 1: LANDING PAGE ==================== -->
+    <section id="screen-landing" class="screen-view active">
+      <div class="hero-section">
+        <div class="badge-pill">
+          <span class="badge-dot"></span>
+          ENTERPRISE NEURAL PRESENTATION PLATFORM
+        </div>
+        <h1 class="hero-headline">
+          Turn any complex topic into a <span class="gradient-text">presentation-ready</span> outline.
+        </h1>
+        <p class="hero-description">
+          Generate structured, audience-aligned presentations using transformer-based deep learning, 384-dimensional dense semantic embeddings, and intelligent narrative refinement.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" onclick="navigateTo('create')">
+            Create Presentation
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="loadDemoPresentation('healthcare')">
+            🩺 Demo 1: AI in Healthcare (8 Slides)
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="loadDemoPresentation('autonomous_driving')">
+            🚗 Demo 2: Autonomous Driving (10 Slides)
+          </button>
+        </div>
+
+        <!-- Tech Badges -->
+        <div class="tech-badges-row">
+          <div class="tech-badge">
+            <span class="tech-badge-dot"></span>
+            <strong>FLAN-T5 Base</strong> (Sequence-to-Sequence)
+          </div>
+          <div class="tech-badge">
+            <span class="tech-badge-dot"></span>
+            <strong>Sentence-BERT</strong> (all-MiniLM-L6-v2)
+          </div>
+          <div class="tech-badge">
+            <span class="tech-badge-dot"></span>
+            <strong>384D Embeddings</strong> (Dense Semantic Space)
+          </div>
+          <div class="tech-badge">
+            <span class="tech-badge-dot"></span>
+            <strong>Cosine Refinement</strong> (&ge; 0.88 Threshold)
+          </div>
+        </div>
+
+        <!-- Visual Pipeline Representation -->
+        <div class="pipeline-card">
+          <div class="pipeline-title">END-TO-END DEEP LEARNING & NLP PIPELINE</div>
+          <div class="pipeline-flow">
+            <div class="flow-step">
+              <div class="step-num">01</div>
+              <div class="step-name">Input Validation</div>
+              <div class="step-sub">Parameters & Bounds</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+              <div class="step-num">02</div>
+              <div class="step-name">Text Preprocessing</div>
+              <div class="step-sub">Tokenize & Bigrams</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+              <div class="step-num">03</div>
+              <div class="step-name">Topic Analysis</div>
+              <div class="step-sub">Taxonomy Matching</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+              <div class="step-num">04</div>
+              <div class="step-name">Sentence-BERT</div>
+              <div class="step-sub">384D Embeddings</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step highlight">
+              <div class="step-num">05</div>
+              <div class="step-name">FLAN-T5 Generation</div>
+              <div class="step-sub">Beam Search = 3</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+              <div class="step-num">06</div>
+              <div class="step-name">Semantic Refinement</div>
+              <div class="step-sub">Cosine &ge; 0.88</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step">
+              <div class="step-num">07</div>
+              <div class="step-name">Multi-Export</div>
+              <div class="step-sub">PPTX / MD / JSON</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Cards Grid -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3>Smart Content Planning</h3>
+            <p>Guarantees exact requested slide count (3–20) and balanced pacing with coherent logical narrative progression.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Transformer-Based Synthesis</h3>
+            <p>Sequence-to-sequence beam search inference with FLAN-T5 synthesizes concise bullets, real-world case studies, and speaker notes.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Semantic Refinement</h3>
+            <p>Sentence-BERT vector embeddings detect repetitive statements at a cosine similarity threshold of 0.88 and refine redundant content.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h3>Multi-Format Export</h3>
+            <p>Instantly export 16:9 widescreen PowerPoint slides with formatted notes, structured Markdown, or machine-readable JSON.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2: CREATE PRESENTATION ==================== -->
+    <section id="screen-create" class="screen-view">
+      <div class="create-layout">
+        <!-- LEFT: Input Panel -->
+        <div class="panel input-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Create your presentation</h2>
+            <p class="panel-desc">Configure your presentation parameters or choose a featured preset below.</p>
+          </div>
+
+          <!-- Featured Quick Templates / Presets -->
+          <div class="presets-section">
+            <div class="presets-label">FEATURED PRESETS (ONE-CLICK DEMO):</div>
+            <div class="presets-btn-group">
+              <button type="button" class="preset-btn" id="preset-btn-healthcare" onclick="applyPreset('healthcare')">
+                🩺 AI in Healthcare (8 Slides, 12 min)
+              </button>
+              <button type="button" class="preset-btn" id="preset-btn-autodrive" onclick="applyPreset('autonomous_driving')">
+                🚗 Autonomous Vehicles (10 Slides, 15 min)
+              </button>
+            </div>
+          </div>
+
+          <form id="presentation-form" onsubmit="handleGenerate(event)">
+            <!-- Topic Input -->
+            <div class="form-group">
+              <label for="input-topic">Presentation Topic <span class="required">*</span></label>
+              <input type="text" id="input-topic" class="form-control" placeholder="e.g. Artificial Intelligence in Healthcare" required value="Artificial Intelligence in Healthcare" oninput="updateLivePreview()">
+            </div>
+
+            <!-- Objective Input -->
+            <div class="form-group">
+              <label for="input-objective">Presentation Objective <span class="required">*</span></label>
+              <textarea id="input-objective" class="form-control" rows="2" placeholder="What should your audience understand?" required oninput="updateLivePreview()">Explain how AI is transforming healthcare diagnosis and patient care</textarea>
+            </div>
+
+            <!-- Two Column Controls -->
+            <div class="form-row">
+              <div class="form-group col-half">
+                <label for="select-audience">Target Audience</label>
+                <select id="select-audience" class="form-control" onchange="updateLivePreview()">
+                  <option value="College Students" selected>College Students</option>
+                  <option value="Engineering Faculty">Engineering Faculty</option>
+                  <option value="Researchers">Researchers</option>
+                  <option value="Corporate Executives">Corporate Executives</option>
+                  <option value="General Audience">General Audience</option>
+                </select>
+              </div>
+
+              <div class="form-group col-half">
+                <label for="select-type">Presentation Type</label>
+                <select id="select-type" class="form-control" onchange="updateLivePreview()">
+                  <option value="Technical Seminar" selected>Technical Seminar</option>
+                  <option value="Academic Presentation">Academic Presentation</option>
+                  <option value="Workshop">Workshop</option>
+                  <option value="Case Study">Case Study</option>
+                  <option value="Research Presentation">Research Presentation</option>
+                  <option value="Corporate Briefing">Corporate Briefing</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Difficulty Segmented Radio -->
+            <div class="form-group">
+              <label>Difficulty Level</label>
+              <div class="segmented-control">
+                <input type="radio" id="diff-beginner" name="difficulty" value="Beginner" onchange="updateLivePreview()">
+                <label for="diff-beginner">Beginner</label>
+
+                <input type="radio" id="diff-intermediate" name="difficulty" value="Intermediate" checked onchange="updateLivePreview()">
+                <label for="diff-intermediate">Intermediate</label>
+
+                <input type="radio" id="diff-advanced" name="difficulty" value="Advanced" onchange="updateLivePreview()">
+                <label for="diff-advanced">Advanced</label>
+              </div>
+            </div>
+
+            <!-- Sliders: Slides and Duration -->
+            <div class="form-row sliders-row">
+              <div class="form-group col-half">
+                <div class="slider-header">
+                  <label for="range-slides">Slide Count (3–20)</label>
+                  <span class="range-badge" id="val-slides">8 slides</span>
+                </div>
+                <input type="range" id="range-slides" min="3" max="20" value="8" class="range-slider" oninput="document.getElementById('val-slides').innerText = this.value + ' slides'; updateLivePreview()">
+              </div>
+
+              <div class="form-group col-half">
+                <div class="slider-header">
+                  <label for="range-duration">Duration (3–60 min)</label>
+                  <span class="range-badge" id="val-duration">12 mins</span>
+                </div>
+                <input type="range" id="range-duration" min="3" max="60" value="12" class="range-slider" oninput="document.getElementById('val-duration').innerText = this.value + ' mins'; updateLivePreview()">
+              </div>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="form-error-banner" class="alert-box alert-error" style="display: none;"></div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-generate">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                Generate Presentation
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- RIGHT: Live Summary & System Info Panel -->
+        <div class="panel preview-panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Presentation Preview</h3>
+            <p class="panel-desc">Live outline preview and deep learning runtime configuration.</p>
+          </div>
+
+          <div class="preview-box">
+            <div class="preview-meta">
+              <div class="preview-badge" id="preview-domain-tag">Healthcare / Tech</div>
+              <h3 id="preview-topic-title" class="preview-title">Artificial Intelligence in Healthcare</h3>
+              <p id="preview-objective-text" class="preview-desc">Explain how AI is transforming healthcare diagnosis and patient care</p>
+            </div>
+
+            <div class="preview-stats-grid">
+              <div class="pstat-item">
+                <div class="pstat-label">SLIDES</div>
+                <div class="pstat-value" id="preview-stat-slides">8</div>
+              </div>
+              <div class="pstat-item">
+                <div class="pstat-label">DURATION</div>
+                <div class="pstat-value" id="preview-stat-duration">12 min</div>
+              </div>
+              <div class="pstat-item">
+                <div class="pstat-label">PACE</div>
+                <div class="pstat-value" id="preview-stat-pace">1.5 m/slide</div>
+              </div>
+              <div class="pstat-item">
+                <div class="pstat-label">AUDIENCE</div>
+                <div class="pstat-value" id="preview-stat-audience">College</div>
+              </div>
+            </div>
+
+            <div class="system-specs-card">
+              <div class="specs-title">ACTIVE NEURAL CONFIGURATION</div>
+              <div class="spec-row">
+                <span>Generation Model:</span>
+                <strong>google/flan-t5-base</strong>
+              </div>
+              <div class="spec-row">
+                <span>Semantic Model:</span>
+                <strong>all-MiniLM-L6-v2</strong>
+              </div>
+              <div class="spec-row">
+                <span>Embedding Size:</span>
+                <strong>384 dimensions</strong>
+              </div>
+              <div class="spec-row">
+                <span>Similarity Threshold:</span>
+                <strong>0.88 Cosine</strong>
+              </div>
+              <div class="spec-row">
+                <span>Execution Device:</span>
+                <strong id="device-indicator">Apple Silicon MPS / GPU</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 3: GENERATION STATE ==================== -->
+    <section id="screen-generating" class="screen-view">
+      <div class="generating-container">
+        <div class="generating-card">
+          <div class="generating-header">
+            <div class="spinner-ring"></div>
+            <h2>Building your presentation...</h2>
+            <p>The neural engine is analyzing your topic and synthesizing a structured presentation deck.</p>
+          </div>
+
+          <!-- Dynamic Status -->
+          <div class="dynamic-status-pill">
+            <span class="status-pulse"></span>
+            <span id="gen-status-text">FLAN-T5 is generating slide 1 of 8...</span>
+          </div>
+
+          <!-- Real Progress Stepper -->
+          <div class="stepper-list">
+            <div class="step-item completed" id="step-1">
+              <div class="step-icon">✓</div>
+              <div class="step-content">
+                <div class="step-label">Input validated</div>
+                <div class="step-details">Slide count, topic bounds, and objective verified</div>
+              </div>
+            </div>
+            <div class="step-item completed" id="step-2">
+              <div class="step-icon">✓</div>
+              <div class="step-content">
+                <div class="step-label">Text preprocessing</div>
+                <div class="step-details">Whitespace normalization, tokens, and keyphrase scoring</div>
+              </div>
+            </div>
+            <div class="step-item completed" id="step-3">
+              <div class="step-icon">✓</div>
+              <div class="step-content">
+                <div class="step-label">Topic analysis</div>
+                <div class="step-details">Domain taxonomy matching and depth estimation</div>
+              </div>
+            </div>
+            <div class="step-item completed" id="step-4">
+              <div class="step-icon">✓</div>
+              <div class="step-content">
+                <div class="step-label">Semantic embeddings</div>
+                <div class="step-details">Sentence-BERT 384D dense vector calculation</div>
+              </div>
+            </div>
+            <div class="step-item active" id="step-5">
+              <div class="step-icon">●</div>
+              <div class="step-content">
+                <div class="step-label">Content planning</div>
+                <div class="step-details">Exact slide count structure & time allocation</div>
+              </div>
+            </div>
+            <div class="step-item pending" id="step-6">
+              <div class="step-icon">○</div>
+              <div class="step-content">
+                <div class="step-label">Transformer generation</div>
+                <div class="step-details">google/flan-t5-base beam search sequence generation</div>
+              </div>
+            </div>
+            <div class="step-item pending" id="step-7">
+              <div class="step-icon">○</div>
+              <div class="step-content">
+                <div class="step-label">Semantic refinement</div>
+                <div class="step-details">Cosine threshold &ge; 0.88 redundancy reduction</div>
+              </div>
+            </div>
+            <div class="step-item pending" id="step-8">
+              <div class="step-icon">○</div>
+              <div class="step-content">
+                <div class="step-label">Presentation ready</div>
+                <div class="step-details">Output packaging for display and multi-format export</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 4: GENERATED PRESENTATION ==================== -->
+    <section id="screen-result" class="screen-view">
+      <div class="result-container">
+        <!-- Result Header -->
+        <div class="result-header">
+          <div class="result-title-group">
+            <span class="badge-pill">AI-GENERATED PRESENTATION OUTLINE</span>
+            <h1 class="result-title" id="res-topic-title">Artificial Intelligence in Healthcare</h1>
+            <p class="result-subtitle" id="res-objective-text">Explain how AI is transforming healthcare diagnosis and patient care</p>
+          </div>
+
+          <div class="result-top-actions">
+            <button class="btn btn-secondary" onclick="navigateToDetail(0)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+              Slide Presentation View
+            </button>
+            <button class="btn btn-secondary" onclick="handleRefineCurrent()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+              Refine Redundancy
+            </button>
+            <button class="btn btn-primary" onclick="openExportModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Export Presentation
+            </button>
+          </div>
+        </div>
+
+        <!-- Top Statistics Ribbon -->
+        <div class="stats-ribbon">
+          <div class="ribbon-card">
+            <div class="ribbon-label">Detected Domain</div>
+            <div class="ribbon-val" id="stat-domain">Healthcare</div>
+          </div>
+          <div class="ribbon-card">
+            <div class="ribbon-label">Slides</div>
+            <div class="ribbon-val" id="stat-slides">8</div>
+          </div>
+          <div class="ribbon-card">
+            <div class="ribbon-label">Duration</div>
+            <div class="ribbon-val" id="stat-duration">12 min</div>
+          </div>
+          <div class="ribbon-card">
+            <div class="ribbon-label">Difficulty</div>
+            <div class="ribbon-val" id="stat-difficulty">Intermediate</div>
+          </div>
+          <div class="ribbon-card">
+            <div class="ribbon-label">Content Refinement</div>
+            <div class="ribbon-val success">Completed</div>
+          </div>
+          <div class="ribbon-card">
+            <div class="ribbon-label">Redundant Points Removed</div>
+            <div class="ribbon-val accent" id="stat-redundant">0</div>
+          </div>
+        </div>
+
+        <!-- Slide Cards List -->
+        <div class="slides-list" id="slides-cards-container">
+          <!-- Dynamically Populated with Expandable Cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 5: SLIDE DETAIL VIEW ==================== -->
+    <section id="screen-detail" class="screen-view">
+      <div class="detail-container">
+        <!-- Top Back Bar -->
+        <div class="detail-topbar">
+          <button class="btn btn-secondary btn-sm" onclick="navigateTo('result')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to All Slides
+          </button>
+          <div class="detail-counter">
+            Slide <span id="detail-current-no">01</span> of <span id="detail-total-no">08</span>
+          </div>
+          <div class="detail-topbar-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openExportModal()">Export</button>
+          </div>
+        </div>
+
+        <div class="detail-split-layout">
+          <!-- LEFT: Slide Navigation (01, 02, ...) -->
+          <div class="detail-nav-pane">
+            <div class="nav-pane-title">SLIDES OUTLINE</div>
+            <div class="detail-nav-list" id="detail-nav-thumbnails">
+              <!-- Dynamically populated 01, 02 ... -->
+            </div>
+          </div>
+
+          <!-- RIGHT: Large Slide Preview -->
+          <div class="detail-preview-pane">
+            <div class="slide-canvas" id="slide-canvas">
+              <div class="canvas-header">
+                <div class="canvas-badge" id="canvas-badge">SLIDE 01</div>
+                <div class="canvas-time" id="canvas-time">⏱ 1.5 min</div>
+              </div>
+
+              <h2 class="canvas-title" id="canvas-title" contenteditable="false">Introduction to Artificial Intelligence in Healthcare</h2>
+              <div class="canvas-purpose" id="canvas-purpose">Purpose: Introduce the role of AI in modern healthcare.</div>
+
+              <div class="canvas-body">
+                <div class="canvas-bullets-col">
+                  <h4 class="canvas-col-title">KEY DISCUSSION POINTS</h4>
+                  <ul class="canvas-bullets-list" id="canvas-bullets">
+                    <!-- Bullets -->
+                  </ul>
+                </div>
+              </div>
+
+              <div class="canvas-notes-bar">
+                <strong>Speaker Notes:</strong>
+                <p id="canvas-speaker-notes">Explain the importance of AI in healthcare and introduce the major areas covered in the presentation.</p>
+              </div>
+            </div>
+
+            <!-- Slide Navigation Controls -->
+            <div class="canvas-controls">
+              <button class="btn btn-secondary" id="btn-prev-slide" onclick="navigateSlide(-1)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Previous
+              </button>
+
+              <div class="canvas-action-group">
+                <button class="btn btn-secondary" onclick="toggleEditCurrentSlide()" id="btn-edit-slide">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  Edit Content
+                </button>
+                <button class="btn btn-secondary" onclick="handleRegenerateSingleSlide()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                  Regenerate Slide
+                </button>
+              </div>
+
+              <button class="btn btn-primary" id="btn-next-slide" onclick="navigateSlide(1)">
+                Next
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 7: MY PRESENTATIONS ==================== -->
+    <section id="screen-history" class="screen-view">
+      <div class="history-container">
+        <div class="history-header">
+          <div>
+            <h1 class="page-title">My Presentations</h1>
+            <p class="page-subtitle">Access previously generated presentation outlines and export archives.</p>
+          </div>
+          <button class="btn btn-primary" onclick="navigateTo('create')">+ New Presentation</button>
+        </div>
+
+        <div class="history-filter-bar">
+          <div class="search-input-wrap">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="history-search-input" placeholder="Search presentations..." oninput="renderHistoryCards()">
+          </div>
+
+          <div class="filter-pills" id="history-filter-pills">
+            <button class="filter-pill active" onclick="setHistoryFilter('All')">All</button>
+            <button class="filter-pill" onclick="setHistoryFilter('Recent')">Recent</button>
+            <button class="filter-pill" onclick="setHistoryFilter('Technical Seminar')">Technical</button>
+            <button class="filter-pill" onclick="setHistoryFilter('Academic Presentation')">Academic</button>
+            <button class="filter-pill" onclick="setHistoryFilter('Case Study')">Case Study</button>
+          </div>
+        </div>
+
+        <!-- History Cards Grid -->
+        <div class="history-grid" id="history-cards-grid">
+          <!-- Populated from localStorage -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 8: ABOUT / SYSTEM ARCHITECTURE ==================== -->
+    <section id="screen-about" class="screen-view">
+      <div class="about-container">
+        <div class="about-hero">
+          <span class="badge-pill">DEEP LEARNING PLATFORM ARCHITECTURE</span>
+          <h1 class="about-title">How the AI Engine Works</h1>
+          <p class="about-desc">
+            End-to-End Deep Learning Architecture, Pretrained Transformer Models, Semantic Embeddings, and Multi-Format Presentation Synthesis.
+          </p>
+        </div>
+
+        <!-- Technical Pipeline Flowchart -->
+        <div class="arch-card">
+          <h3 class="arch-card-title">NEURAL PIPELINE FLOWCHART</h3>
+          <div class="pipeline-vertical">
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>USER INPUT SPECIFICATION</strong>
+                <span>Topic, Objective, Target Audience, Slide Count (3–20), Duration (3–60 min), Difficulty</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>INPUT VALIDATION</strong>
+                <span>Boundary verification, character checks, range enforcement (exact slides & duration budgeting)</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>TEXT PREPROCESSING</strong>
+                <span>Whitespace normalization, tokenization, stopword filtering, unigram/bigram candidate extraction</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>TOPIC ANALYSIS & DEPTH ESTIMATION</strong>
+                <span>Domain taxonomy across Healthcare, Technology, Finance, Environmental Science, Education</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step highlight-card">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>SENTENCE-BERT SEMANTIC EMBEDDING</strong>
+                <span>all-MiniLM-L6-v2 produces 384-dimensional dense semantic vectors</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>CONTENT PLANNER</strong>
+                <span>Guarantees exact requested slide count and balanced minutes-per-slide pacing</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step highlight-card">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>FLAN-T5 TRANSFORMER GENERATION</strong>
+                <span>google/flan-t5-base sequence-to-sequence beam search (beams=3, no_repeat_ngram=2)</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>SLIDE STRUCTURE GENERATION</strong>
+                <span>Synthesizes titles, 3–5 concise bullets, applied case studies, and speaker notes</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step highlight-card">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>SEMANTIC CONTENT REFINEMENT</strong>
+                <span>SBERT cosine similarity &ge; 0.88 detects redundancy; FLAN-T5 generates distinct alternatives</span>
+              </div>
+            </div>
+            <div class="pv-arrow">&darr;</div>
+            <div class="pv-step">
+              <div class="pv-dot"></div>
+              <div class="pv-body">
+                <strong>MULTI-FORMAT EXPORT</strong>
+                <span>python-pptx 16:9 widescreen presentation, Markdown outline, structured JSON</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Cards Grid -->
+        <div class="tech-cards-grid">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <span class="tech-tag">GENERATION</span>
+              <h3>FLAN-T5</h3>
+            </div>
+            <div class="tech-model-id">google/flan-t5-base</div>
+            <p>
+              Pretrained sequence-to-sequence transformer model fine-tuned on chain-of-thought instruction datasets. Used for prompt-guided slide content generation with beam search = 3.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <span class="tech-tag">EMBEDDING</span>
+              <h3>Sentence-BERT</h3>
+            </div>
+            <div class="tech-model-id">sentence-transformers/all-MiniLM-L6-v2</div>
+            <p>
+              Pretrained Siamese dual-encoder neural network mapping sentences into a 384-dimensional dense semantic space for pairwise cosine similarity evaluation.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <span class="tech-tag">REFINEMENT</span>
+              <h3>Semantic Refinement</h3>
+            </div>
+            <div class="tech-model-id">Cosine Threshold: 0.88</div>
+            <p>
+              Intra-slide and inter-slide bullet vectors are compared. Points exceeding the 0.88 threshold are flagged as redundant and replaced with complementary perspectives.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <span class="tech-tag">PLANNING</span>
+              <h3>Content Planning</h3>
+            </div>
+            <div class="tech-model-id">3–20 Slides | 3–60 Mins</div>
+            <p>
+              Enforces rigorous structure: Introduction &rarr; Background &rarr; Architecture &rarr; Methodology &rarr; Applications &rarr; Benchmarks &rarr; Conclusion.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <span class="tech-tag">EXPORT</span>
+              <h3>Multi-Format Export</h3>
+            </div>
+            <div class="tech-model-id">PPTX • Markdown • JSON</div>
+            <p>
+              Generates genuine 16:9 widescreen PowerPoint decks via python-pptx with embedded notes, GitHub-flavored Markdown, and full JSON hierarchies.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <span class="tech-tag">HARDWARE</span>
+              <h3>Hardware Acceleration</h3>
+            </div>
+            <div class="tech-model-id">MPS / CUDA / CPU</div>
+            <p>
+              Automatic device detection natively leverages Apple Silicon Metal Performance Shaders (MPS), NVIDIA CUDA, or optimized multi-threaded CPU tensor operations.
+            </p>
+          </div>
+        </div>
+
+        <!-- System Specifications Table -->
+        <div class="specs-card-container">
+          <h3>SYSTEM SPECIFICATIONS & PERFORMANCE BENCHMARKS</h3>
+          <table class="specs-table">
+            <tr>
+              <td><strong>Generation Model</strong></td>
+              <td><code>google/flan-t5-base</code> (Pretrained Sequence-to-Sequence Transformer)</td>
+            </tr>
+            <tr>
+              <td><strong>Embedding Model</strong></td>
+              <td><code>sentence-transformers/all-MiniLM-L6-v2</code></td>
+            </tr>
+            <tr>
+              <td><strong>Vector Dimension</strong></td>
+              <td>384 dense floating-point dimensions</td>
+            </tr>
+            <tr>
+              <td><strong>Beam Search Configuration</strong></td>
+              <td>num_beams = 3, no_repeat_ngram_size = 2, early_stopping = True</td>
+            </tr>
+            <tr>
+              <td><strong>Redundancy Metric</strong></td>
+              <td>Cosine Similarity &ge; 0.88</td>
+            </tr>
+            <tr>
+              <td><strong>Supported Slide Count</strong></td>
+              <td>3 to 20 slides (guaranteed exact output count)</td>
+            </tr>
+            <tr>
+              <td><strong>Supported Duration</strong></td>
+              <td>3 to 60 minutes (dynamic time allocation per slide)</td>
+            </tr>
+            <tr>
+              <td><strong>Supported Domains</strong></td>
+              <td>Healthcare, Deep Learning / Tech, Finance, Environmental Science, Education</td>
+            </tr>
+            <tr>
+              <td><strong>Export File Formats</strong></td>
+              <td>PPTX (16:9 Widescreen with notes), Markdown (.md), JSON (.json)</td>
+            </tr>
+            <tr>
+              <td><strong>Detected Device</strong></td>
+              <td><span id="platform-device-text">Apple Silicon MPS</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Professional Platform Assurance -->
+        <div class="platform-assurance-callout">
+          <strong>Enterprise Quality Assurance:</strong>
+          PresentAI uses sequence-to-sequence neural architectures and dense vector embeddings to generate structured presentation outlines. Generated decks are fully editable and downloadable in multiple presentation formats.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== SCREEN 6: EXPORT MODAL ==================== -->
+  <div id="export-modal" class="modal-backdrop" onclick="closeExportModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Export your presentation</h2>
+          <p class="modal-desc">Download your AI-generated presentation in your preferred format.</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeExportModal()">&times;</button>
+      </div>
+
+      <div class="export-cards-grid">
+        <!-- PPTX Card -->
+        <div class="export-card">
+          <div class="export-badge">POWERPOINT</div>
+          <div class="export-format-code">PPTX</div>
+          <p class="export-card-desc">16:9 widescreen presentation with slide layouts, case studies, and speaker notes.</p>
+          <button class="btn btn-primary btn-block" onclick="triggerDownload('pptx')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download PPTX
+          </button>
+        </div>
+
+        <!-- Markdown Card -->
+        <div class="export-card">
+          <div class="export-badge">MARKDOWN</div>
+          <div class="export-format-code">MD</div>
+          <p class="export-card-desc">Structured presentation outline with headings, bullets, case studies, and talk notes.</p>
+          <button class="btn btn-secondary btn-block" onclick="triggerDownload('markdown')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Markdown
+          </button>
+        </div>
+
+        <!-- JSON Card -->
+        <div class="export-card">
+          <div class="export-badge">MACHINE-READABLE</div>
+          <div class="export-format-code">JSON</div>
+          <p class="export-card-desc">Valid machine-readable presentation hierarchy with full metadata and slides schema.</p>
+          <button class="btn btn-secondary btn-block" onclick="triggerDownload('json')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download JSON
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-footer-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        Ready for presentation delivery. All slides can be edited directly before downloading.
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
