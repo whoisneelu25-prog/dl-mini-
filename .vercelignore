@@ -1,0 +1,12 @@
+ai_presentation_generator/*.py
+ai_presentation_generator/requirements.txt
+ai_presentation_generator/tests/
+ai_presentation_generator/outputs/
+*.py
+requirements.txt
+Dockerfile
+render.yaml
+run_*.sh
+venv/
+.pytest_cache/
+.agents/

@@ -2,6 +2,6 @@
   "version": 2,
   "framework": null,
   "buildCommand": "echo 'Deploying static frontend'",
-  "outputDirectory": "ai_presentation_generator/frontend",
+  "outputDirectory": "frontend",
   "cleanUrls": true
 }
