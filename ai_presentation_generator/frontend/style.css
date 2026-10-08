@@ -392,26 +392,55 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
-  padding-bottom: 6px;
+  padding: 6px 2px 12px 2px;
+}
+
+.pipeline-flow::-webkit-scrollbar {
+  height: 5px;
+}
+
+.pipeline-flow::-webkit-scrollbar-track {
+  background: var(--bg-subtle);
+  border-radius: 4px;
+}
+
+.pipeline-flow::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 4px;
 }
 
 .flow-step {
-  flex: 1;
-  min-width: 110px;
+  flex: 1 1 0;
+  min-width: 120px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 12px 10px;
+  border-radius: var(--radius-md);
+  padding: 14px 8px;
   text-align: center;
-  transition: transform var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 98px;
+  box-sizing: border-box;
+  transition: all var(--transition-fast);
+}
+
+.flow-step:hover {
+  background: #ffffff;
+  border-color: rgba(79, 70, 229, 0.35);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-level-1);
 }
 
 .flow-step.highlight {
-  background: var(--bg-chip);
-  border-color: var(--border-focus);
-  box-shadow: var(--glow-neural);
+  background: #ffffff;
+  border: 1.5px solid var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12), var(--shadow-level-1);
 }
 
 .step-num {
@@ -419,27 +448,37 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .step-name {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-primary);
-  white-space: nowrap;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  white-space: normal;
+  word-break: normal;
+  text-align: center;
 }
 
 .step-sub {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   color: var(--text-muted);
-  white-space: nowrap;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
 }
 
 .flow-arrow {
-  color: var(--text-muted);
-  font-weight: 700;
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  color: var(--color-primary);
+  opacity: 0.45;
 }
 
 .features-grid {
