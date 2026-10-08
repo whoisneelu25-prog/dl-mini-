@@ -50,7 +50,7 @@ st.markdown("""
     
     h1, h2, h3, h4 {
         font-family: 'Outfit', sans-serif;
-        color: #0f172a;
+        color: #0d1e15;
         letter-spacing: -0.02em;
     }
     
@@ -60,15 +60,15 @@ st.markdown("""
     
     .hero-badge {
         display: inline-block;
-        background: #eef2ff;
-        color: #4f46e5;
+        background: #e8f7ee;
+        color: #05603a;
         font-size: 0.78rem;
         font-weight: 700;
         padding: 5px 14px;
         border-radius: 9999px;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        border: 1px solid rgba(79, 70, 229, 0.15);
+        border: 1px solid rgba(5, 96, 58, 0.18);
         margin-bottom: 8px;
     }
     
@@ -93,11 +93,11 @@ st.markdown("""
     .stat-card .val {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #0f172a;
+        color: #0d1e15;
     }
     
     .stat-card .val.accent {
-        color: #4f46e5;
+        color: #05603a;
     }
     
     .stat-card .val.success {
@@ -107,7 +107,7 @@ st.markdown("""
     .case-study-box {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
-        border-left: 4px solid #4f46e5;
+        border-left: 4px solid #d97706; background: #fefce8; border-color: #fef08a;
         border-radius: 8px;
         padding: 14px 18px;
         margin: 14px 0;
@@ -261,8 +261,8 @@ with tabs[0]:
         p_pace = round(duration / num_slides, 1)
         st.markdown(f"""
         <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(15,23,42,0.05);">
-            <div style="font-size: 0.75rem; font-weight: 700; color: #4f46e5; text-transform: uppercase; margin-bottom: 6px;">Live Target Outline</div>
-            <h4 style="margin: 0 0 6px 0; color: #0f172a;">{topic or 'Presentation Topic'}</h4>
+            <div style="font-size: 0.75rem; font-weight: 700; color: #05603a; text-transform: uppercase; margin-bottom: 6px;">Live Target Outline</div>
+            <h4 style="margin: 0 0 6px 0; color: #0d1e15;">{topic or 'Presentation Topic'}</h4>
             <p style="font-size: 0.88rem; color: #475569; margin-bottom: 16px;">{objective or 'Presentation goals...'}</p>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center;">
                 <div style="background: #f8fafc; padding: 8px; border-radius: 6px;"><div style="font-size: 0.65rem; color: #64748b;">SLIDES</div><strong>{num_slides}</strong></div>
@@ -275,8 +275,8 @@ with tabs[0]:
 
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown(f"""
-        <div style="background: #0f172a; color: #f8fafc; border-radius: 12px; padding: 20px;">
-            <div style="font-size: 0.72rem; font-weight: 700; color: #818cf8; margin-bottom: 10px;">NEURAL PIPELINE RUNTIME</div>
+        <div style="background: #0d1e15; color: #f8fafc; border-radius: 12px; padding: 20px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #facc15; margin-bottom: 10px;">NEURAL PIPELINE RUNTIME</div>
             <div style="font-size: 0.82rem; margin-bottom: 6px;">Seq2Seq Model: <strong>google/flan-t5-base</strong></div>
             <div style="font-size: 0.82rem; margin-bottom: 6px;">Embedding Model: <strong>all-MiniLM-L6-v2 (384D)</strong></div>
             <div style="font-size: 0.82rem; margin-bottom: 6px;">Similarity Metric: <strong>Cosine &ge; 0.88</strong></div>
@@ -398,7 +398,7 @@ with tabs[0]:
 
                 st.markdown(f"""
                 <div class="case-study-box">
-                    <strong style="color: #4f46e5; font-size: 0.76rem; text-transform: uppercase;">Case Study / Real-World Application</strong><br>
+                    <strong style="color: #b45309; font-size: 0.76rem; text-transform: uppercase;">Case Study / Real-World Application</strong><br>
                     {slide.get('case_study', 'Real-world deployment.')}
                 </div>
                 """, unsafe_allow_html=True)
@@ -427,22 +427,22 @@ with tabs[1]:
         st.markdown(f"""
         <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px; box-shadow: 0 4px 16px rgba(15,23,42,0.06);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span style="font-size: 0.8rem; font-weight: 700; color: #4f46e5;">SLIDE {curr_slide['slide_number']:02d} / {total_s:02d}</span>
+                <span style="font-size: 0.8rem; font-weight: 700; color: #05603a;">SLIDE {curr_slide['slide_number']:02d} / {total_s:02d}</span>
                 <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">⏱ {curr_slide['time_minutes']:.1f} min</span>
             </div>
-            <h2 style="font-size: 2rem; margin-bottom: 6px; color: #0f172a;">{curr_slide['title']}</h2>
+            <h2 style="font-size: 2rem; margin-bottom: 6px; color: #0d1e15;">{curr_slide['title']}</h2>
             <p style="font-style: italic; color: #64748b; margin-bottom: 24px;">Purpose: {curr_slide['purpose']}</p>
             <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; margin-bottom: 24px;">
                 <div>
-                    <h4 style="font-size: 0.78rem; font-weight: 700; color: #4f46e5; text-transform: uppercase; margin-bottom: 12px;">Key Bullet Points</h4>
+                    <h4 style="font-size: 0.78rem; font-weight: 700; color: #05603a; text-transform: uppercase; margin-bottom: 12px;">Key Bullet Points</h4>
                     <ul style="font-size: 1rem; line-height: 1.6; color: #1e293b; padding-left: 20px;">
                         {''.join(f'<li>{b}</li>' for b in curr_slide['bullets'])}
                     </ul>
                 </div>
                 <div>
                     <div class="case-study-box">
-                        <strong style="color: #4f46e5; font-size: 0.74rem; text-transform: uppercase;">Real-World Case Study</strong><br>
-                        <p style="margin-top: 6px; font-size: 0.92rem; color: #0f172a;">{curr_slide['case_study']}</p>
+                        <strong style="color: #b45309; font-size: 0.74rem; text-transform: uppercase;">Real-World Case Study</strong><br>
+                        <p style="margin-top: 6px; font-size: 0.92rem; color: #0d1e15;">{curr_slide['case_study']}</p>
                     </div>
                 </div>
             </div>

@@ -12,48 +12,54 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Color Palette Tokens (Fidelity) */
-  --color-primary: #4f46e5;
-  --color-primary-hover: #4338ca;
-  --color-primary-active: #3730a3;
-  --color-secondary: #7c3aed;
-  --color-tertiary: #3b82f6;
-  --color-neutral-dark: #0f172a;
+  /* Organic Botanical & Amber Palette (Forest Emerald + Warm Solar Gold) */
+  --color-primary: #05603a;             /* Deep Forest Emerald */
+  --color-primary-hover: #034b2c;       /* Dark Pine */
+  --color-primary-active: #023820;      /* Midnight Pine */
+  --color-secondary: #d97706;           /* Rich Amber Ochre */
+  --color-accent-yellow: #eab308;       /* Solar Gold Yellow */
+  --color-accent-amber: #f59e0b;        /* Warm Amber */
+  --color-tertiary: #059669;            /* Jade Green */
+  --color-neutral-dark: #0a1811;        /* Botanical Midnight Slate */
 
-  --bg-canvas: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-subtle: #f1f5f9;
-  --bg-chip: #eef2ff;
+  --bg-canvas: #f7faf8;                 /* Soft Herbal Porcelain */
+  --bg-surface: #ffffff;                /* Crisp White Surface */
+  --bg-subtle: #eff5f1;                 /* Subtle Mint-Sage Tint */
+  --bg-chip: #e8f7ee;                   /* Fresh Emerald Mint Chip */
+  --bg-chip-yellow: #fefce8;            /* Warm Sunlight Yellow Chip */
 
-  --border-light: #e2e8f0;
-  --border-medium: #cbd5e1;
-  --border-focus: #6366f1;
+  --border-light: #dde7e0;              /* Soft Sage Border */
+  --border-medium: #c6d6cb;             /* Structured Sage Border */
+  --border-focus: #059669;              /* Crisp Emerald Focus */
+  --border-yellow: #facc15;             /* Golden Yellow Accent Border */
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --text-inverse: #ffffff;
-  --text-brand: #4338ca;
+  --text-primary: #0d1e15;              /* Deep Forest Ink */
+  --text-secondary: #33483c;            /* Muted Herbal Spruce */
+  --text-muted: #5e7467;                /* Mineral Sage Grey */
+  --text-inverse: #ffffff;              /* Clean White */
+  --text-brand: #05603a;                /* Deep Emerald Brand */
+  --text-gold: #92400e;                 /* Deep Amber Ochre */
 
   /* Status Colors */
-  --status-success: #10b981;
+  --status-success: #059669;
   --status-success-bg: #ecfdf5;
   --status-success-border: #a7f3d0;
   --status-success-text: #065f46;
 
-  --status-warning: #f59e0b;
-  --status-warning-bg: #fffbeb;
-  --status-warning-border: #fde68a;
-  --status-warning-text: #92400e;
+  --status-warning: #d97706;
+  --status-warning-bg: #fefce8;
+  --status-warning-border: #fef08a;
+  --status-warning-text: #854d0e;
 
   /* Elevation Tokens */
-  --shadow-level-1: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
-  --shadow-level-2: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-level-3: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+  --shadow-level-1: 0 1px 3px 0 rgba(10, 24, 17, 0.05), 0 1px 2px -1px rgba(10, 24, 17, 0.03);
+  --shadow-level-2: 0 4px 6px -1px rgba(10, 24, 17, 0.07), 0 2px 4px -2px rgba(10, 24, 17, 0.04);
+  --shadow-level-3: 0 12px 20px -3px rgba(10, 24, 17, 0.09), 0 4px 6px -4px rgba(10, 24, 17, 0.04);
 
-  /* Neural Luminescence */
-  --glow-neural: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 4px 12px rgba(79, 70, 229, 0.1);
-  --glow-button: 0 0 12px rgba(79, 70, 229, 0.35);
+  /* Tactile Luminescence (Emerald & Golden Amber) */
+  --glow-neural: 0 0 0 3px rgba(5, 150, 105, 0.18), 0 4px 14px rgba(5, 96, 58, 0.12);
+  --glow-yellow: 0 0 0 3px rgba(234, 179, 8, 0.22), 0 4px 14px rgba(217, 119, 6, 0.15);
+  --glow-button: 0 4px 14px rgba(5, 96, 58, 0.32);
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -129,7 +135,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 2px 8px rgba(5, 96, 58, 0.35);
 }
 
 .brand-text {
@@ -211,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary {
   background: var(--color-primary);
   color: var(--text-inverse);
-  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 2px 6px rgba(5, 96, 58, 0.28); border: 1px solid #034b2c;
 }
 
 .btn-primary:hover {
@@ -265,7 +271,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 5px 12px;
   border-radius: var(--radius-full);
   letter-spacing: 0.02em;
-  border: 1px solid #c7d2fe;
+  border: 1px solid #fef08a;
+  background: var(--bg-chip-yellow);
+  color: var(--text-gold);
 }
 
 .badge-dot {
@@ -345,7 +353,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(135deg, #05603a 0%, #059669 45%, #d97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -432,15 +440,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .flow-step:hover {
   background: #ffffff;
-  border-color: rgba(79, 70, 229, 0.35);
+  border-color: rgba(5, 150, 105, 0.4);
   transform: translateY(-2px);
   box-shadow: var(--shadow-level-1);
 }
 
 .flow-step.highlight {
-  background: #ffffff;
-  border: 1.5px solid var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12), var(--shadow-level-1);
+  background: #fefce8;
+  border: 1.5px solid #d97706;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.22), var(--shadow-level-1);
+}
+.flow-step.highlight .step-num {
+  color: #b45309;
 }
 
 .step-num {
@@ -797,18 +808,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .system-specs-card {
-  background: #0f172a;
-  color: #f8fafc;
+  background: #091a12;
+  color: #f1f8f3;
   border-radius: var(--radius-md);
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 22px;
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  box-shadow: 0 4px 14px rgba(9, 26, 18, 0.25);
 }
 
 .specs-title {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #818cf8;
+  color: #facc15;
   letter-spacing: 0.08em;
   margin-bottom: 12px;
 }
@@ -880,16 +892,16 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--bg-chip);
-  border: 1px solid rgba(79, 70, 229, 0.25);
-  color: var(--color-primary);
+  background: var(--bg-chip-yellow);
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  color: var(--text-gold);
   padding: 8px 18px;
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.84rem;
   font-weight: 600;
   margin-bottom: 32px;
-  box-shadow: var(--glow-neural);
+  box-shadow: var(--glow-yellow);
 }
 
 .status-pulse {
@@ -932,13 +944,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .step-item.active {
-  background: var(--bg-chip);
-  border: 1px solid var(--border-focus);
-  box-shadow: var(--glow-neural);
+  background: var(--bg-chip-yellow);
+  border: 1px solid var(--border-yellow);
+  box-shadow: var(--glow-yellow);
 }
 
 .step-item.active .step-icon {
-  background: var(--color-primary);
+  background: var(--color-secondary);
   color: #fff;
   animation: pulse 1.5s infinite;
 }
@@ -1035,7 +1047,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ribbon-val.accent {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 /* Expandable Slide Outline Cards (Stitch Design Spec) */
@@ -1112,10 +1124,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-secondary);
-  background: var(--bg-subtle);
+  color: var(--text-gold);
+  background: var(--bg-chip-yellow);
   padding: 4px 10px;
   border-radius: 6px;
+  border: 1px solid #fef08a;
 }
 
 .chevron-icon {
@@ -1187,9 +1200,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .case-study-box {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-light);
-  border-left: 3px solid var(--color-primary);
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  border-left: 3.5px solid var(--color-secondary);
   border-radius: var(--radius-sm);
   padding: 14px;
 }
@@ -1198,7 +1211,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 6px;
@@ -1211,8 +1224,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .speaker-notes-box {
-  background: #fdfefe;
-  border: 1px dashed var(--border-medium);
+  background: #f4faf6;
+  border: 1px dashed #86efac;
   border-radius: var(--radius-sm);
   padding: 12px 16px;
   font-size: 0.86rem;
@@ -1287,7 +1300,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-thumbnail.active {
   background: var(--bg-chip);
-  border-color: rgba(79, 70, 229, 0.25);
+  border-color: rgba(5, 96, 58, 0.3);
 }
 
 .thumb-no {
@@ -1396,9 +1409,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .canvas-case-study-box {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-light);
-  border-left: 3px solid var(--color-primary);
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  border-left: 3.5px solid var(--color-secondary);
   border-radius: var(--radius-sm);
   padding: 14px 18px;
   margin-top: 20px;
@@ -1421,30 +1434,30 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-studio-btn:hover {
   background: var(--bg-chip);
-  border-color: rgba(79, 70, 229, 0.35);
+  border-color: rgba(5, 150, 105, 0.4);
   color: var(--color-primary);
 }
 
 [contenteditable="true"] {
-  outline: 2px dashed rgba(79, 70, 229, 0.45);
+  outline: 2px dashed rgba(5, 150, 105, 0.45);
   outline-offset: 4px;
   border-radius: 4px;
-  background-color: rgba(238, 242, 255, 0.25);
+  background-color: rgba(232, 247, 238, 0.35);
   transition: all 0.2s ease;
 }
 
 [contenteditable="true"]:focus {
   outline: 2px solid var(--color-primary);
-  background-color: rgba(238, 242, 255, 0.5);
+  background-color: rgba(232, 247, 238, 0.65);
 }
 
 .canvas-notes-bar {
-  background: var(--bg-subtle);
+  background: #f4faf6;
   border-radius: var(--radius-sm);
   padding: 12px 18px;
   font-size: 0.86rem;
   color: var(--text-secondary);
-  border: 1px solid var(--border-light);
+  border: 1px solid #cce5d5;
 }
 
 .canvas-controls {
@@ -1462,7 +1475,7 @@ h1, h2, h3, h4, h5, h6 {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(10, 24, 17, 0.65);
   backdrop-filter: blur(6px);
   z-index: 1000;
   display: none;

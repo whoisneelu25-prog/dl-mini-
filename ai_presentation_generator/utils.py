@@ -122,11 +122,11 @@ def export_to_pptx(presentation_data: Dict[str, Any], output_path: str) -> str:
     prs.slide_height = Inches(7.5)
     blank_layout = prs.slide_layouts[6]
 
-    NAVY = RGBColor(15, 23, 42)       # #0f172a
-    SLATE = RGBColor(71, 85, 105)     # #475569
-    INDIGO = RGBColor(79, 70, 229)    # #4f46e5
-    LIGHT_BG = RGBColor(248, 250, 252)# #f8fafc
-    BORDER_COLOR = RGBColor(226, 232, 240)
+    NAVY = RGBColor(13, 30, 21)        # #0d1e15 (Forest Black)
+    SLATE = RGBColor(51, 72, 60)       # #33483c (Deep Herbal Spruce)
+    INDIGO = RGBColor(5, 96, 58)       # #05603a (Forest Emerald Green)
+    LIGHT_BG = RGBColor(247, 250, 248) # #f7faf8 (Fresh Herbal Porcelain)
+    BORDER_COLOR = RGBColor(221, 231, 224) # #dde7e0
 
     # 1. Title Slide (Clean & Executive)
     title_slide = prs.slides.add_slide(blank_layout)
