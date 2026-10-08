@@ -245,9 +245,14 @@ async function handleGenerate(event) {
     document.getElementById('gen-status-text').innerText = 'Presentation ready!';
 
     setTimeout(() => {
-      renderGeneratedPresentation(data);
-      navigateTo('result');
-    }, 500);
+      try {
+        renderGeneratedPresentation(data);
+      } catch (renderErr) {
+        console.error('Error rendering presentation view:', renderErr);
+      } finally {
+        navigateTo('result');
+      }
+    }, 400);
 
   } catch (err) {
     clearInterval(stepInterval);
@@ -297,18 +302,48 @@ function updateStepperStage(stepNum, message) {
 // Screen 4: Render Generated Presentation
 // ==========================================================================
 function renderGeneratedPresentation(data) {
-  document.getElementById('res-topic-title').innerText = data.topic;
-  document.getElementById('res-objective-text').innerText = data.objective || 'Presentation Outline';
-  document.getElementById('stat-domain').innerText = data.domain || 'Technology';
-  document.getElementById('stat-slides').innerText = data.num_slides || data.slides.length;
-  document.getElementById('stat-duration').innerText = `${data.duration} min`;
-  document.getElementById('stat-difficulty').innerText = data.difficulty;
-  document.getElementById('stat-redundant').innerText = data.points_refined || 0;
+  if (!data) return;
+
+  const topicEl = document.getElementById('result-topic-title') || document.getElementById('res-topic-title');
+  if (topicEl) topicEl.innerText = data.topic || 'Untitled Presentation';
+
+  const objEl = document.getElementById('result-objective-sub') || document.getElementById('res-objective-text');
+  if (objEl) objEl.innerText = data.objective || 'Presentation Outline';
+
+  const domainEl = document.getElementById('result-domain-badge') || document.getElementById('stat-domain');
+  if (domainEl) domainEl.innerText = data.domain || 'Technology';
+
+  const slidesEl = document.getElementById('ribbon-slides-count') || document.getElementById('stat-slides');
+  const slideCount = (data.slides && data.slides.length) || data.num_slides || 8;
+  if (slidesEl) slidesEl.innerText = slideCount;
+
+  const durEl = document.getElementById('ribbon-duration') || document.getElementById('stat-duration');
+  const durVal = data.duration || 12;
+  if (durEl) durEl.innerText = `${durVal} min`;
+
+  const paceEl = document.getElementById('ribbon-pace');
+  if (paceEl) {
+    const paceVal = (durVal / (slideCount || 1)).toFixed(1);
+    paceEl.innerText = `${paceVal} m/slide`;
+  }
+
+  const audEl = document.getElementById('ribbon-audience') || document.getElementById('stat-difficulty');
+  if (audEl) audEl.innerText = data.audience || data.difficulty || 'Industry Professionals';
+
+  const casesEl = document.getElementById('ribbon-cases') || document.getElementById('stat-redundant');
+  if (casesEl) {
+    const count = (data.slides || []).filter(s => s.case_study && s.case_study.trim().length > 0).length;
+    casesEl.innerText = `${count} Included`;
+  }
+
+  const notesEl = document.getElementById('ribbon-notes');
+  if (notesEl) notesEl.innerText = 'Complete';
 
   const container = document.getElementById('slides-cards-container');
+  if (!container) return;
   container.innerHTML = '';
 
-  data.slides.forEach((slide, idx) => {
+  (data.slides || []).forEach((slide, idx) => {
     const isExpanded = idx === 0 ? 'expanded' : '';
     const card = document.createElement('div');
     card.className = `slide-card ${isExpanded}`;
@@ -318,7 +353,7 @@ function renderGeneratedPresentation(data) {
       .map(b => `<li>${escapeHtml(b)}</li>`)
       .join('');
 
-    const caseStudyHtml = slide.case_study ? `
+    const caseStudyHtml = (slide.case_study && slide.case_study.trim().length > 0) ? `
       <div class="case-study-box" style="margin-bottom: 16px;">
         <div class="case-tag">Case Study / Real-World Application</div>
         <p>${escapeHtml(slide.case_study)}</p>
@@ -334,7 +369,7 @@ function renderGeneratedPresentation(data) {
           <button class="btn btn-secondary btn-sm card-studio-btn" onclick="event.stopPropagation(); navigateToDetail(${idx})">
             Open in Studio
           </button>
-          <span class="slide-time-badge">⏱ ${slide.time_minutes.toFixed(1)} min</span>
+          <span class="slide-time-badge">⏱ ${(slide.time_minutes || 1.5).toFixed(1)} min</span>
           <svg class="chevron-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
@@ -342,7 +377,7 @@ function renderGeneratedPresentation(data) {
       </div>
       <div class="slide-card-body">
         <div class="slide-purpose-box">
-          <strong>Purpose:</strong> ${escapeHtml(slide.purpose)}
+          <strong>Purpose:</strong> ${escapeHtml(slide.purpose || '')}
         </div>
         <div class="slide-content-split">
           <div>
@@ -410,8 +445,8 @@ let isSlideEditing = false;
 
 function resetEditMode() {
   isSlideEditing = false;
-  const titleEl = document.getElementById('canvas-title');
-  const bullets = document.querySelectorAll('#canvas-bullets li');
+  const titleEl = document.getElementById('canvas-slide-title') || document.getElementById('canvas-title');
+  const bullets = document.querySelectorAll('#canvas-bullet-points li, #canvas-bullets li');
   const caseEl = document.getElementById('canvas-case-study');
   const notesEl = document.getElementById('canvas-speaker-notes');
   const btn = document.getElementById('btn-edit-slide');
@@ -428,46 +463,70 @@ function resetEditMode() {
 }
 
 function renderCurrentSlideDetail() {
+  if (!currentPresentation || !currentPresentation.slides || !currentPresentation.slides.length) return;
   const slide = currentPresentation.slides[currentSlideIndex];
+  if (!slide) return;
   const total = currentPresentation.slides.length;
 
-  document.getElementById('detail-current-no').innerText = String(slide.slide_number).padStart(2, '0');
-  document.getElementById('detail-total-no').innerText = String(total).padStart(2, '0');
+  const counterEl = document.getElementById('detail-slide-counter');
+  if (counterEl) counterEl.innerText = `Slide ${slide.slide_number} of ${total}`;
 
-  document.getElementById('canvas-badge').innerText = `SLIDE ${String(slide.slide_number).padStart(2, '0')}`;
-  document.getElementById('canvas-time').innerText = `⏱ ${slide.time_minutes.toFixed(1)} min`;
-  document.getElementById('canvas-title').innerText = slide.title;
-  document.getElementById('canvas-purpose').innerText = `Purpose: ${slide.purpose}`;
+  const currNoEl = document.getElementById('detail-current-no');
+  if (currNoEl) currNoEl.innerText = String(slide.slide_number).padStart(2, '0');
+  const totalNoEl = document.getElementById('detail-total-no');
+  if (totalNoEl) totalNoEl.innerText = String(total).padStart(2, '0');
 
-  const bulletsContainer = document.getElementById('canvas-bullets');
-  bulletsContainer.innerHTML = (slide.bullets || []).map(b => `<li>${escapeHtml(b)}</li>`).join('');
+  const badgeEl = document.getElementById('canvas-slide-num') || document.getElementById('canvas-badge');
+  if (badgeEl) badgeEl.innerText = `SLIDE ${String(slide.slide_number).padStart(2, '0')}`;
+
+  const timeEl = document.getElementById('canvas-slide-time') || document.getElementById('canvas-time');
+  if (timeEl) timeEl.innerText = `⏱️ ~${(slide.time_minutes || 1.5).toFixed(1)} min`;
+
+  const titleEl = document.getElementById('canvas-slide-title') || document.getElementById('canvas-title');
+  if (titleEl) titleEl.innerText = slide.title || '';
+
+  const purposeEl = document.getElementById('canvas-slide-purpose') || document.getElementById('canvas-purpose');
+  if (purposeEl) purposeEl.innerText = slide.purpose ? `Purpose: ${slide.purpose}` : '';
+
+  const bulletsContainer = document.getElementById('canvas-bullet-points') || document.getElementById('canvas-bullets');
+  if (bulletsContainer) {
+    bulletsContainer.innerHTML = (slide.bullets || []).map(b => `<li>${escapeHtml(b)}</li>`).join('');
+  }
 
   const caseEl = document.getElementById('canvas-case-study');
-  const caseContainer = document.getElementById('canvas-case-container');
   if (caseEl) {
-    caseEl.innerText = slide.case_study || '';
-    if (caseContainer) {
-      caseContainer.style.display = slide.case_study ? 'block' : 'none';
+    caseEl.innerText = slide.case_study || 'No specific case study for this slide.';
+    const caseBox = caseEl.closest('.canvas-case-study-box') || document.getElementById('canvas-case-container');
+    if (caseBox) {
+      caseBox.style.display = (slide.case_study && slide.case_study.trim().length > 0) ? 'block' : 'none';
     }
   }
 
-  document.getElementById('canvas-speaker-notes').innerText = slide.speaker_notes || '';
+  const notesEl = document.getElementById('canvas-speaker-notes');
+  if (notesEl) notesEl.innerText = slide.speaker_notes || '';
 
-  document.getElementById('btn-prev-slide').disabled = currentSlideIndex === 0;
-  document.getElementById('btn-next-slide').disabled = currentSlideIndex === total - 1;
+  const prevBtn = document.getElementById('btn-prev-slide');
+  if (prevBtn) prevBtn.disabled = currentSlideIndex === 0;
+
+  const nextBtn = document.getElementById('btn-next-slide');
+  if (nextBtn) nextBtn.disabled = currentSlideIndex === total - 1;
 
   resetEditMode();
 }
 
 function navigateSlide(direction) {
-  currentSlideIndex += direction;
-  renderDetailNavigation();
-  renderCurrentSlideDetail();
+  if (!currentPresentation || !currentPresentation.slides) return;
+  const newIdx = currentSlideIndex + direction;
+  if (newIdx >= 0 && newIdx < currentPresentation.slides.length) {
+    currentSlideIndex = newIdx;
+    renderDetailNavigation();
+    renderCurrentSlideDetail();
+  }
 }
 
 function toggleEditCurrentSlide() {
-  const titleEl = document.getElementById('canvas-title');
-  const bullets = document.querySelectorAll('#canvas-bullets li');
+  const titleEl = document.getElementById('canvas-slide-title') || document.getElementById('canvas-title');
+  const bullets = document.querySelectorAll('#canvas-bullet-points li, #canvas-bullets li');
   const caseEl = document.getElementById('canvas-case-study');
   const notesEl = document.getElementById('canvas-speaker-notes');
   const btn = document.getElementById('btn-edit-slide');
@@ -479,9 +538,11 @@ function toggleEditCurrentSlide() {
     if (caseEl) caseEl.contentEditable = "true";
     if (notesEl) notesEl.contentEditable = "true";
 
-    titleEl.focus();
-    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Save Changes`;
-    btn.classList.add('btn-primary');
+    if (titleEl) titleEl.focus();
+    if (btn) {
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Save Changes`;
+      btn.classList.add('btn-primary');
+    }
   } else {
     isSlideEditing = false;
     if (titleEl) titleEl.contentEditable = "false";
@@ -489,33 +550,37 @@ function toggleEditCurrentSlide() {
     if (caseEl) caseEl.contentEditable = "false";
     if (notesEl) notesEl.contentEditable = "false";
 
-    const updatedSlide = currentPresentation.slides[currentSlideIndex];
-    if (titleEl && titleEl.innerText.trim()) {
-      updatedSlide.title = titleEl.innerText.trim();
+    const updatedSlide = currentPresentation && currentPresentation.slides && currentPresentation.slides[currentSlideIndex];
+    if (updatedSlide) {
+      if (titleEl && titleEl.innerText.trim()) {
+        updatedSlide.title = titleEl.innerText.trim();
+      }
+
+      const newBullets = [];
+      bullets.forEach(b => {
+        const text = b.innerText.trim();
+        if (text) newBullets.push(text);
+      });
+      if (newBullets.length > 0) {
+        updatedSlide.bullets = newBullets;
+      }
+
+      if (caseEl && caseEl.innerText.trim()) {
+        updatedSlide.case_study = caseEl.innerText.trim();
+      }
+      if (notesEl) {
+        updatedSlide.speaker_notes = notesEl.innerText.trim();
+      }
+
+      saveToHistory(currentPresentation);
+      renderDetailNavigation();
+      renderGeneratedPresentation(currentPresentation);
     }
 
-    const newBullets = [];
-    bullets.forEach(b => {
-      const text = b.innerText.trim();
-      if (text) newBullets.push(text);
-    });
-    if (newBullets.length > 0) {
-      updatedSlide.bullets = newBullets;
+    if (btn) {
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Content`;
+      btn.classList.remove('btn-primary');
     }
-
-    if (caseEl && caseEl.innerText.trim()) {
-      updatedSlide.case_study = caseEl.innerText.trim();
-    }
-    if (notesEl) {
-      updatedSlide.speaker_notes = notesEl.innerText.trim();
-    }
-
-    saveToHistory(currentPresentation);
-    renderDetailNavigation();
-    renderGeneratedPresentation(currentPresentation);
-
-    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Content`;
-    btn.classList.remove('btn-primary');
   }
 }
 
@@ -599,12 +664,22 @@ function openExportModal() {
     alert('Please select or generate a presentation first.');
     return;
   }
-  document.getElementById('export-modal').classList.add('active');
+  const modal = document.getElementById('export-modal');
+  if (modal) modal.classList.add('active');
 }
 
 function closeExportModal(e) {
   if (e && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn')) return;
-  document.getElementById('export-modal').classList.remove('active');
+  const modal = document.getElementById('export-modal');
+  if (modal) modal.classList.remove('active');
+}
+
+function openSlideStudio(idx = 0) {
+  navigateToDetail(idx);
+}
+
+function downloadExport(format) {
+  triggerDownload(format);
 }
 
 async function triggerDownload(format) {
@@ -678,15 +753,17 @@ function getHistoryList() {
 }
 
 function setHistoryFilter(filterName) {
-  currentFilter = filterName;
-  document.querySelectorAll('#history-filter-pills .filter-pill').forEach(pill => {
-    pill.classList.toggle('active', pill.innerText.includes(filterName));
+  currentFilter = filterName || 'all';
+  document.querySelectorAll('.filter-pills .filter-pill, #history-filter-pills .filter-pill').forEach(pill => {
+    const txt = pill.innerText.toLowerCase();
+    const target = (filterName || '').toLowerCase();
+    pill.classList.toggle('active', txt.includes(target) || (target === 'all' && txt.includes('all')));
   });
   renderHistoryCards();
 }
 
 function renderHistoryCards() {
-  const container = document.getElementById('history-cards-grid');
+  const container = document.getElementById('history-cards-container') || document.getElementById('history-cards-grid');
   if (!container) return;
 
   const search = (document.getElementById('history-search-input')?.value || '').toLowerCase();
@@ -698,10 +775,16 @@ function renderHistoryCards() {
   }
 
   const filtered = list.filter(item => {
-    const matchesSearch = item.topic.toLowerCase().includes(search) || (item.objective || '').toLowerCase().includes(search);
+    const topicStr = (item.topic || '').toLowerCase();
+    const objStr = (item.objective || '').toLowerCase();
+    const matchesSearch = !search || topicStr.includes(search) || objStr.includes(search);
     if (!matchesSearch) return false;
-    if (currentFilter === 'All' || currentFilter === 'Recent') return true;
-    return item.presentation_type === currentFilter;
+
+    if (!currentFilter || currentFilter.toLowerCase() === 'all' || currentFilter.toLowerCase() === 'recent') return true;
+    const fLow = currentFilter.toLowerCase();
+    return (item.domain || '').toLowerCase().includes(fLow) ||
+           (item.presentation_type || '').toLowerCase().includes(fLow) ||
+           topicStr.includes(fLow);
   });
 
   if (filtered.length === 0) {
@@ -718,8 +801,8 @@ function renderHistoryCards() {
         </div>
         <h3 class="hcard-title">${escapeHtml(item.topic)}</h3>
         <div class="hcard-meta">
-          <span class="hcard-pill">${item.num_slides} Slides</span>
-          <span class="hcard-pill">${item.duration} Mins</span>
+          <span class="hcard-pill">${item.num_slides || (item.slides ? item.slides.length : 8)} Slides</span>
+          <span class="hcard-pill">${item.duration || 12} Mins</span>
           <span class="hcard-pill">${escapeHtml(item.audience || 'General')}</span>
           <span class="hcard-pill">${escapeHtml(item.difficulty || 'Intermediate')}</span>
         </div>
