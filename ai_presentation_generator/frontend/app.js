@@ -68,20 +68,38 @@ function applyPreset(presetType) {
   if (presetType === 'healthcare') {
     document.getElementById('preset-btn-healthcare')?.classList.add('active');
     topicInput.value = 'Artificial Intelligence in Healthcare';
-    objectiveInput.value = 'Explain how AI is transforming healthcare diagnosis and patient care';
-    audienceSelect.value = 'College Students';
-    typeSelect.value = 'Technical Seminar';
+    objectiveInput.value = 'Explain how AI is transforming healthcare diagnosis, clinical decisions, and patient outcomes';
+    audienceSelect.value = 'Industry Professionals';
+    typeSelect.value = 'Executive Briefing';
     document.getElementById('diff-intermediate').checked = true;
     slidesSlider.value = 8;
     durationSlider.value = 12;
   } else if (presetType === 'autonomous_driving') {
     document.getElementById('preset-btn-autodrive')?.classList.add('active');
-    topicInput.value = 'Autonomous Driving and Computer Vision';
-    objectiveInput.value = 'Analyze deep neural perception, LiDAR sensor fusion, and real-time path planning in self-driving vehicles';
-    audienceSelect.value = 'Engineering Faculty';
-    typeSelect.value = 'Technical Seminar';
+    topicInput.value = 'Autonomous Vehicles & Smart Mobility';
+    objectiveInput.value = 'Analyze perception systems, sensor fusion, safety validation, and commercial deployment of self-driving fleets';
+    audienceSelect.value = 'Corporate Executives';
+    typeSelect.value = 'Executive Briefing';
     document.getElementById('diff-advanced').checked = true;
     slidesSlider.value = 10;
+    durationSlider.value = 15;
+  } else if (presetType === 'clean_energy') {
+    document.getElementById('preset-btn-energy')?.classList.add('active');
+    topicInput.value = 'Clean Energy Transition & Smart Grids';
+    objectiveInput.value = 'Examine utility-scale renewables, grid battery storage economics, and decarbonization strategies';
+    audienceSelect.value = 'Corporate Executives';
+    typeSelect.value = 'Executive Briefing';
+    document.getElementById('diff-intermediate').checked = true;
+    slidesSlider.value = 6;
+    durationSlider.value = 10;
+  } else if (presetType === 'enterprise_saas') {
+    document.getElementById('preset-btn-cloud')?.classList.add('active');
+    topicInput.value = 'Enterprise Cloud Architecture & Strategy';
+    objectiveInput.value = 'Review cloud modernization roadmaps, microservice scalability, and enterprise data governance';
+    audienceSelect.value = 'Technical Teams';
+    typeSelect.value = 'Case Study';
+    document.getElementById('diff-advanced').checked = true;
+    slidesSlider.value = 8;
     durationSlider.value = 15;
   }
 
@@ -167,14 +185,14 @@ async function handleGenerate(event) {
   resetStepper();
 
   const steps = [
-    { id: 'step-1', msg: 'Input parameters verified (slides, duration, objective).' },
-    { id: 'step-2', msg: 'Preprocessing text: whitespace normalization & keyphrase extraction...' },
-    { id: 'step-3', msg: 'Topic analysis: taxonomy categorization & depth estimation...' },
-    { id: 'step-4', msg: 'Sentence-BERT: computing 384-dimensional dense semantic embeddings...' },
-    { id: 'step-5', msg: `Content planner: structuring exact ${num_slides}-slide progression (${duration} mins)...` },
-    { id: 'step-6', msg: `FLAN-T5 beam search generation (beam_width=3, no_repeat_ngram=2)...` },
-    { id: 'step-7', msg: 'Semantic content refinement: SBERT cosine similarity filter (threshold 0.88)...' },
-    { id: 'step-8', msg: 'Packaging presentation structure and export schemas...' },
+    { id: 'step-1', msg: 'Validating presentation parameters (slide count, pacing, audience)...' },
+    { id: 'step-2', msg: 'Structuring narrative outline & logical section progression...' },
+    { id: 'step-3', msg: 'Analyzing topic focus & core executive themes...' },
+    { id: 'step-4', msg: 'Formulating high-impact arguments & slide headlines...' },
+    { id: 'step-5', msg: `Planning exact ${num_slides}-slide sequence (${duration} mins total pacing)...` },
+    { id: 'step-6', msg: `Synthesizing slide titles, talking points & applied examples...` },
+    { id: 'step-7', msg: 'Polishing content clarity & drafting contextual presenter notes...' },
+    { id: 'step-8', msg: 'Finalizing presentation deck & generating export schemas...' },
   ];
 
   let currentStepIdx = 0;
@@ -508,7 +526,7 @@ async function handleRegenerateSingleSlide(event) {
   const btn = (event && event.currentTarget) || document.getElementById('btn-regen-slide');
   const originalText = btn ? btn.innerHTML : 'Regenerate Slide';
   if (btn) {
-    btn.innerText = 'Regenerating with FLAN-T5...';
+    btn.innerText = 'Regenerating Slide...';
     btn.disabled = true;
   }
 
@@ -546,7 +564,7 @@ async function handleRefineCurrent(event) {
   const btn = (event && event.currentTarget) || document.getElementById('btn-refine-outline');
   const originalHtml = btn ? btn.innerHTML : 'Refine Redundancy';
   if (btn) {
-    btn.innerText = 'Refining (SBERT 0.88)...';
+    btn.innerText = 'Refining Content...';
     btn.disabled = true;
   }
 
