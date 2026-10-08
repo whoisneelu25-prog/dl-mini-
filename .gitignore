@@ -8,3 +8,6 @@ __pycache__/
 .coverage
 htmlcov/
 .agents/
+
+# Temporary generation outputs
+ai_presentation_generator/outputs/presentation_pres_*.pptx
