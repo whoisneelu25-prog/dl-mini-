@@ -166,12 +166,20 @@ def refine_presentation(payload: RefineRequest):
     return pres
 
 
+def _resolve_presentation(payload: Dict[str, Any]) -> Dict[str, Any]:
+    pres_id = payload.get("id")
+    if "slides" in payload and payload.get("slides"):
+        if pres_id:
+            presentations_cache[pres_id] = payload
+        return payload
+    if pres_id and pres_id in presentations_cache:
+        return presentations_cache[pres_id]
+    return {}
+
+
 @app.post("/export/pptx")
 def export_pptx_endpoint(payload: Dict[str, Any]):
-    pres_id = payload.get("id")
-    pres = presentations_cache.get(pres_id)
-    if not pres and "slides" in payload:
-        pres = payload
+    pres = _resolve_presentation(payload)
     if not pres or "slides" not in pres:
         raise HTTPException(status_code=400, detail="Invalid presentation data")
 
@@ -183,10 +191,7 @@ def export_pptx_endpoint(payload: Dict[str, Any]):
 
 @app.post("/export/markdown")
 def export_markdown_endpoint(payload: Dict[str, Any]):
-    pres_id = payload.get("id")
-    pres = presentations_cache.get(pres_id)
-    if not pres and "slides" in payload:
-        pres = payload
+    pres = _resolve_presentation(payload)
     if not pres or "slides" not in pres:
         raise HTTPException(status_code=400, detail="Invalid presentation data")
 
@@ -198,10 +203,7 @@ def export_markdown_endpoint(payload: Dict[str, Any]):
 
 @app.post("/export/json")
 def export_json_endpoint(payload: Dict[str, Any]):
-    pres_id = payload.get("id")
-    pres = presentations_cache.get(pres_id)
-    if not pres and "slides" in payload:
-        pres = payload
+    pres = _resolve_presentation(payload)
     if not pres or "slides" not in pres:
         raise HTTPException(status_code=400, detail="Invalid presentation data")
 

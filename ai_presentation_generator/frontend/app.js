@@ -300,6 +300,12 @@ function renderGeneratedPresentation(data) {
       .map(b => `<li>${escapeHtml(b)}</li>`)
       .join('');
 
+    const caseStudyHtml = slide.case_study ? `
+      <div class="case-study-box" style="margin-bottom: 16px;">
+        <div class="case-tag">Case Study / Real-World Application</div>
+        <p>${escapeHtml(slide.case_study)}</p>
+      </div>` : '';
+
     card.innerHTML = `
       <div class="slide-card-header" onclick="toggleSlideCard(${idx})">
         <div class="slide-header-left">
@@ -307,6 +313,9 @@ function renderGeneratedPresentation(data) {
           <span class="slide-card-title">${escapeHtml(slide.title)}</span>
         </div>
         <div class="slide-header-right">
+          <button class="btn btn-secondary btn-sm card-studio-btn" onclick="event.stopPropagation(); navigateToDetail(${idx})">
+            Open in Studio
+          </button>
           <span class="slide-time-badge">⏱ ${slide.time_minutes.toFixed(1)} min</span>
           <svg class="chevron-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="6 9 12 15 18 9"></polyline>
@@ -325,6 +334,7 @@ function renderGeneratedPresentation(data) {
             </ul>
           </div>
         </div>
+        ${caseStudyHtml}
         <div class="speaker-notes-box">
           <strong>Speaker Notes:</strong> ${escapeHtml(slide.speaker_notes || '')}
         </div>
@@ -378,6 +388,27 @@ function renderDetailNavigation() {
   });
 }
 
+let isSlideEditing = false;
+
+function resetEditMode() {
+  isSlideEditing = false;
+  const titleEl = document.getElementById('canvas-title');
+  const bullets = document.querySelectorAll('#canvas-bullets li');
+  const caseEl = document.getElementById('canvas-case-study');
+  const notesEl = document.getElementById('canvas-speaker-notes');
+  const btn = document.getElementById('btn-edit-slide');
+
+  if (titleEl) titleEl.contentEditable = "false";
+  bullets.forEach(b => b.contentEditable = "false");
+  if (caseEl) caseEl.contentEditable = "false";
+  if (notesEl) notesEl.contentEditable = "false";
+
+  if (btn) {
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Content`;
+    btn.classList.remove('btn-primary');
+  }
+}
+
 function renderCurrentSlideDetail() {
   const slide = currentPresentation.slides[currentSlideIndex];
   const total = currentPresentation.slides.length;
@@ -393,11 +424,21 @@ function renderCurrentSlideDetail() {
   const bulletsContainer = document.getElementById('canvas-bullets');
   bulletsContainer.innerHTML = (slide.bullets || []).map(b => `<li>${escapeHtml(b)}</li>`).join('');
 
-  const caseEl = document.getElementById('canvas-case-study'); if (caseEl) { caseEl.innerText = slide.case_study || ''; }
+  const caseEl = document.getElementById('canvas-case-study');
+  const caseContainer = document.getElementById('canvas-case-container');
+  if (caseEl) {
+    caseEl.innerText = slide.case_study || '';
+    if (caseContainer) {
+      caseContainer.style.display = slide.case_study ? 'block' : 'none';
+    }
+  }
+
   document.getElementById('canvas-speaker-notes').innerText = slide.speaker_notes || '';
 
   document.getElementById('btn-prev-slide').disabled = currentSlideIndex === 0;
   document.getElementById('btn-next-slide').disabled = currentSlideIndex === total - 1;
+
+  resetEditMode();
 }
 
 function navigateSlide(direction) {
@@ -408,32 +449,68 @@ function navigateSlide(direction) {
 
 function toggleEditCurrentSlide() {
   const titleEl = document.getElementById('canvas-title');
+  const bullets = document.querySelectorAll('#canvas-bullets li');
+  const caseEl = document.getElementById('canvas-case-study');
+  const notesEl = document.getElementById('canvas-speaker-notes');
   const btn = document.getElementById('btn-edit-slide');
-  const isEditable = titleEl.isContentEditable;
 
-  if (!isEditable) {
-    titleEl.contentEditable = "true";
+  if (!isSlideEditing) {
+    isSlideEditing = true;
+    if (titleEl) titleEl.contentEditable = "true";
+    bullets.forEach(b => b.contentEditable = "true");
+    if (caseEl) caseEl.contentEditable = "true";
+    if (notesEl) notesEl.contentEditable = "true";
+
     titleEl.focus();
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Save Changes`;
     btn.classList.add('btn-primary');
   } else {
-    titleEl.contentEditable = "false";
-    currentPresentation.slides[currentSlideIndex].title = titleEl.innerText.trim();
+    isSlideEditing = false;
+    if (titleEl) titleEl.contentEditable = "false";
+    bullets.forEach(b => b.contentEditable = "false");
+    if (caseEl) caseEl.contentEditable = "false";
+    if (notesEl) notesEl.contentEditable = "false";
+
+    const updatedSlide = currentPresentation.slides[currentSlideIndex];
+    if (titleEl && titleEl.innerText.trim()) {
+      updatedSlide.title = titleEl.innerText.trim();
+    }
+
+    const newBullets = [];
+    bullets.forEach(b => {
+      const text = b.innerText.trim();
+      if (text) newBullets.push(text);
+    });
+    if (newBullets.length > 0) {
+      updatedSlide.bullets = newBullets;
+    }
+
+    if (caseEl && caseEl.innerText.trim()) {
+      updatedSlide.case_study = caseEl.innerText.trim();
+    }
+    if (notesEl) {
+      updatedSlide.speaker_notes = notesEl.innerText.trim();
+    }
+
     saveToHistory(currentPresentation);
     renderDetailNavigation();
+    renderGeneratedPresentation(currentPresentation);
+
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Content`;
     btn.classList.remove('btn-primary');
   }
 }
 
-async function handleRegenerateSingleSlide() {
+async function handleRegenerateSingleSlide(event) {
   if (!currentPresentation) return;
   const slideNo = currentPresentation.slides[currentSlideIndex].slide_number;
 
-  const btn = event.currentTarget;
-  const originalText = btn.innerHTML;
-  btn.innerText = 'Regenerating with FLAN-T5...';
-  btn.disabled = true;
+  const btn = (event && event.currentTarget) || document.getElementById('btn-regen-slide');
+  const originalText = btn ? btn.innerHTML : 'Regenerate Slide';
+  if (btn) {
+    btn.innerText = 'Regenerating with FLAN-T5...';
+    btn.disabled = true;
+  }
 
   try {
     const res = await fetch('/regenerate-slide', {
@@ -457,17 +534,21 @@ async function handleRegenerateSingleSlide() {
   } catch (e) {
     alert('Regeneration error: ' + e.message);
   } finally {
-    btn.innerHTML = originalText;
-    btn.disabled = false;
+    if (btn) {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
   }
 }
 
-async function handleRefineCurrent() {
+async function handleRefineCurrent(event) {
   if (!currentPresentation) return;
-  const btn = event.currentTarget;
-  const originalHtml = btn.innerHTML;
-  btn.innerText = 'Refining (SBERT 0.88)...';
-  btn.disabled = true;
+  const btn = (event && event.currentTarget) || document.getElementById('btn-refine-outline');
+  const originalHtml = btn ? btn.innerHTML : 'Refine Redundancy';
+  if (btn) {
+    btn.innerText = 'Refining (SBERT 0.88)...';
+    btn.disabled = true;
+  }
 
   try {
     const res = await fetch('/refine', {
@@ -485,8 +566,10 @@ async function handleRefineCurrent() {
   } catch (e) {
     alert('Refine error: ' + e.message);
   } finally {
-    btn.innerHTML = originalHtml;
-    btn.disabled = false;
+    if (btn) {
+      btn.innerHTML = originalHtml;
+      btn.disabled = false;
+    }
   }
 }
 
@@ -955,3 +1038,25 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
+
+// Keyboard Navigation for Detail Canvas Studio View (Left, Right, Escape)
+document.addEventListener('keydown', (e) => {
+  const detailScreen = document.getElementById('screen-detail');
+  if (detailScreen && detailScreen.classList.contains('active')) {
+    if (document.activeElement && (document.activeElement.isContentEditable || ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName))) {
+      return;
+    }
+    if (e.key === 'ArrowRight') {
+      if (currentPresentation && currentSlideIndex < currentPresentation.slides.length - 1) {
+        navigateSlide(1);
+      }
+    } else if (e.key === 'ArrowLeft') {
+      if (currentSlideIndex > 0) {
+        navigateSlide(-1);
+      }
+    } else if (e.key === 'Escape') {
+      navigateTo('result');
+    }
+  }
+});

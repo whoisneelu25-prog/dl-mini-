@@ -1356,6 +1356,49 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
+.canvas-case-study-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-top: 20px;
+}
+
+.canvas-case-study-box p {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card-studio-btn {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-right: 8px;
+  transition: all var(--transition-fast);
+}
+
+.card-studio-btn:hover {
+  background: var(--bg-chip);
+  border-color: rgba(79, 70, 229, 0.35);
+  color: var(--color-primary);
+}
+
+[contenteditable="true"] {
+  outline: 2px dashed rgba(79, 70, 229, 0.45);
+  outline-offset: 4px;
+  border-radius: 4px;
+  background-color: rgba(238, 242, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+[contenteditable="true"]:focus {
+  outline: 2px solid var(--color-primary);
+  background-color: rgba(238, 242, 255, 0.5);
+}
+
 .canvas-notes-bar {
   background: var(--bg-subtle);
   border-radius: var(--radius-sm);

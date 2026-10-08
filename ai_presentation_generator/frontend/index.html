@@ -429,7 +429,7 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
               Slide Presentation View
             </button>
-            <button class="btn btn-secondary" onclick="handleRefineCurrent()">
+            <button class="btn btn-secondary" onclick="handleRefineCurrent(event)" id="btn-refine-outline">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
               Refine Redundancy
             </button>
@@ -519,6 +519,10 @@
                     <!-- Bullets -->
                   </ul>
                 </div>
+                <div class="canvas-case-study-box" id="canvas-case-container">
+                  <div class="case-tag">Case Study / Real-World Application</div>
+                  <p id="canvas-case-study"></p>
+                </div>
               </div>
 
               <div class="canvas-notes-bar">
@@ -539,7 +543,7 @@
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                   Edit Content
                 </button>
-                <button class="btn btn-secondary" onclick="handleRegenerateSingleSlide()">
+                <button class="btn btn-secondary" onclick="handleRegenerateSingleSlide(event)" id="btn-regen-slide">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                   Regenerate Slide
                 </button>

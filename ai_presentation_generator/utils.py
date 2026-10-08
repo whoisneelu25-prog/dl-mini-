@@ -221,7 +221,15 @@ def export_to_pptx(presentation_data: Dict[str, Any], output_path: str) -> str:
         # Speaker notes stored in native notes slide
         notes_text = slide_data.get("speaker_notes", "")
         time_m = slide_data.get("time_minutes", 1.5)
-        slide.notes_slide.notes_text_frame.text = f"Allocated Pacing: {time_m:.1f} min\n\nSpeaker Notes:\n{notes_text}"
+        case_study = slide_data.get("case_study", "")
+        notes_parts = [f"Allocated Pacing: {time_m:.1f} min"]
+        if purpose:
+            notes_parts.append(f"Slide Purpose: {purpose}")
+        if case_study:
+            notes_parts.append(f"Case Study / Real-World Application:\n{case_study}")
+        if notes_text:
+            notes_parts.append(f"Speaker Notes:\n{notes_text}")
+        slide.notes_slide.notes_text_frame.text = "\n\n".join(notes_parts)
 
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     prs.save(output_path)
