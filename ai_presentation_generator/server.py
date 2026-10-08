@@ -83,6 +83,8 @@ def system_info():
 @app.post("/generate")
 def generate_presentation(payload: GenerateRequest):
     data = payload.model_dump()
+    if not data.get("objective") or len(str(data["objective"]).strip()) < 5:
+        data["objective"] = f"Comprehensive presentation and practical overview of {data.get('topic', 'the topic')}."
     valid, errors = validate_input(data)
     if not valid:
         raise HTTPException(status_code=400, detail={"errors": errors})

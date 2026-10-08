@@ -25,6 +25,8 @@ VALID_AUDIENCES = [
     "Researchers",
     "Corporate Executives",
     "General Audience",
+    "Industry Professionals",
+    "Technical Teams",
 ]
 
 VALID_DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"]
@@ -36,6 +38,11 @@ VALID_PRESENTATION_TYPES = [
     "Case Study",
     "Research Presentation",
     "Corporate Briefing",
+    "Executive Briefing",
+    "Product Pitch",
+    "Keynote",
+    "Training Session",
+    "General Presentation",
 ]
 
 
@@ -82,9 +89,20 @@ def validate_input(params: Dict[str, Any]) -> Tuple[bool, List[str]]:
     if difficulty not in VALID_DIFFICULTIES:
         errors.append(f"Difficulty must be one of {VALID_DIFFICULTIES}.")
 
-    presentation_type = params.get("presentation_type", "Technical Seminar")
-    if presentation_type not in VALID_PRESENTATION_TYPES:
-        errors.append(f"Presentation Type must be one of {VALID_PRESENTATION_TYPES}.")
+    presentation_type = str(params.get("presentation_type", "Corporate Briefing")).strip()
+    if not presentation_type:
+        params["presentation_type"] = "Corporate Briefing"
+    else:
+        matched_pt = next((pt for pt in VALID_PRESENTATION_TYPES if pt.lower() == presentation_type.lower()), None)
+        if matched_pt:
+            params["presentation_type"] = matched_pt
+        elif presentation_type not in VALID_PRESENTATION_TYPES:
+            # Normalize user-specified type to VALID_PRESENTATION_TYPES or Corporate Briefing
+            if len(presentation_type) <= 50:
+                VALID_PRESENTATION_TYPES.append(presentation_type)
+                params["presentation_type"] = presentation_type
+            else:
+                params["presentation_type"] = "Corporate Briefing" 
 
     audience = params.get("audience", "College Students")
     if not audience or not str(audience).strip():

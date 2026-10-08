@@ -175,9 +175,9 @@ async function handleGenerate(event) {
     return;
   }
   if (!objective || objective.length < 5) {
-    errBox.innerText = 'Please provide an objective describing what the audience will learn.';
-    errBox.style.display = 'block';
-    return;
+    objective = `Comprehensive overview, key takeaways, and practical applications of ${topic}`;
+    const objField = document.getElementById('input-objective');
+    if (objField) objField.value = objective;
   }
 
   // Switch to Screen 3: Generation State
