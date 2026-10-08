@@ -11,3 +11,4 @@ htmlcov/
 
 # Temporary generation outputs
 ai_presentation_generator/outputs/presentation_pres_*.pptx
+ai_presentation_generator/outputs/presentation_pres_*
