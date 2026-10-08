@@ -3,7 +3,8 @@
  * Connects modern UI to Python/FastAPI backend & Deep Learning models.
  */
 
-// Application State
+// API Configuration & Application State
+const API_BASE = window.API_BASE_URL || localStorage.getItem('API_BASE_URL') || '';
 let currentPresentation = null;
 let currentSlideIndex = 0;
 let currentFilter = 'All';
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Check API Health & Hardware Device
 async function checkBackendHealth() {
   try {
-    const res = await fetch('/health');
+    const res = await fetch(`${API_BASE}/health`);
     if (res.ok) {
       const data = await res.json();
       const dev = data.system?.execution_device || 'MPS';
@@ -214,7 +215,7 @@ async function handleGenerate(event) {
       duration,
     };
 
-    const response = await fetch('/generate', {
+    const response = await fetch(`${API_BASE}/generate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -596,7 +597,7 @@ async function handleRegenerateSingleSlide(event) {
   }
 
   try {
-    const res = await fetch('/regenerate-slide', {
+    const res = await fetch(`${API_BASE}/regenerate-slide`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -634,7 +635,7 @@ async function handleRefineCurrent(event) {
   }
 
   try {
-    const res = await fetch('/refine', {
+    const res = await fetch(`${API_BASE}/refine`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ presentation_id: currentPresentation.id }),
@@ -685,7 +686,7 @@ function downloadExport(format) {
 async function triggerDownload(format) {
   if (!currentPresentation) return;
 
-  const endpoint = `/export/${format}`;
+  const endpoint = `${API_BASE}/export/${format}`;
   try {
     const res = await fetch(endpoint, {
       method: 'POST',

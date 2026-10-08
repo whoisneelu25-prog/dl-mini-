@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: presentai-deep-learning
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: APP_EXECUTION_DEVICE
+        value: cpu
