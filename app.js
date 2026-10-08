@@ -869,7 +869,7 @@ async function triggerDownload(format) {
   }
 }
 
-// Native In-Browser PPTX Generator (PptxGenJS)
+// Native In-Browser PPTX Generator (PptxGenJS) - Modern 16:9 Executive Edition
 async function exportToPptx(presData, safeTopic) {
   try {
     if (typeof PptxGenJS === 'undefined') {
@@ -878,128 +878,426 @@ async function exportToPptx(presData, safeTopic) {
     }
 
     const pptx = new PptxGenJS();
-    pptx.layout = 'LAYOUT_16x9';
+
+    // Standard 16:9 Widescreen Layout (13.333" x 7.5")
+    pptx.defineLayout({ name: 'LAYOUT_16X9_WIDE', width: 13.333, height: 7.5 });
+    pptx.layout = 'LAYOUT_16X9_WIDE';
     pptx.title = presData.topic;
     pptx.subject = presData.objective;
     pptx.author = 'PresentAI Studio';
 
-    // 1. Cover Title Slide
+    const BG_COLOR = '0B0F17';       // Deep Obsidian Midnight
+    const CARD_BG = '111827';        // Dark Slate Card Fill
+    const CARD_BORDER = '1E293B';    // Refined Subtle Border
+    const EMERALD = '10B981';        // Primary Emerald Accent
+    const EMERALD_DARK = '132A22';   // Pill Container Dark Green
+    const CASE_BG = '0D201A';        // Case Study Card Green Obsidian
+    const SKY_BLUE = '38BDF8';       // Cyan/Sky Accent
+    const TEXT_WHITE = 'FFFFFF';
+    const TEXT_BODY = 'E2E8F0';
+    const TEXT_MUTED = '94A3B8';
+    const TEXT_DIM = '64748B';
+
+    // ==========================================
+    // 1. COVER TITLE SLIDE (Executive Layout)
+    // ==========================================
     const titleSlide = pptx.addSlide();
-    titleSlide.background = { color: '0A0E17' };
+    titleSlide.background = { color: BG_COLOR };
 
-    // Accent line
+    // Decorative Accent Bar (Top Left)
     titleSlide.addShape(pptx.shapes.RECTANGLE, {
-      x: 0.8, y: 0.6, w: 2.5, h: 0.06,
-      fill: { color: '10B981' }, line: { color: '10B981' }
+      x: 0.9, y: 0.65, w: 2.2, h: 0.05,
+      fill: { color: EMERALD }, line: { color: EMERALD }
     });
 
-    // Domain / Type Badge
-    titleSlide.addText(`${(presData.domain || 'Technology').toUpperCase()}  |  ${(presData.presentation_type || 'Executive Briefing').toUpperCase()}`, {
-      x: 0.8, y: 1.0, w: 10.0, h: 0.4,
-      fontSize: 12, bold: true, color: '10B981', fontFace: 'Calibri'
+    // Domain & Presentation Type Pill Badge
+    titleSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 0.9, y: 0.90, w: 4.8, h: 0.36,
+      fill: { color: EMERALD_DARK }, line: { color: EMERALD, width: 1 }
+    });
+    titleSlide.addText(`${(presData.domain || 'TECHNOLOGY').toUpperCase()}   •   ${(presData.presentation_type || 'EXECUTIVE BRIEFING').toUpperCase()}`, {
+      x: 0.9, y: 0.90, w: 4.8, h: 0.36,
+      fontSize: 9.5, bold: true, color: EMERALD, fontFace: 'Calibri',
+      align: 'center', valign: 'middle'
     });
 
-    // Main Topic Title
+    // Top Right Studio Watermark
+    titleSlide.addText('PRESENTAI NEURAL STUDIO', {
+      x: 8.5, y: 0.90, w: 3.933, h: 0.36,
+      fontSize: 9.5, bold: true, color: TEXT_DIM, fontFace: 'Calibri',
+      align: 'right', valign: 'middle'
+    });
+
+    // Main Presentation Title
     titleSlide.addText(presData.topic, {
-      x: 0.8, y: 1.6, w: 11.5, h: 2.0,
-      fontSize: 36, bold: true, color: 'FFFFFF', fontFace: 'Calibri',
+      x: 0.9, y: 1.55, w: 11.533, h: 1.8,
+      fontSize: 38, bold: true, color: TEXT_WHITE, fontFace: 'Calibri',
+      valign: 'middle', wrap: true
+    });
+
+    // Objective Subtitle / Executive Overview Box
+    titleSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 0.9, y: 3.45, w: 11.533, h: 1.25,
+      fill: { color: '0F172A' }, line: { color: '1E293B', width: 1 }
+    });
+    titleSlide.addText('STRATEGIC OBJECTIVE', {
+      x: 1.2, y: 3.60, w: 10.9, h: 0.25,
+      fontSize: 9, bold: true, color: SKY_BLUE, fontFace: 'Calibri'
+    });
+    titleSlide.addText(presData.objective || 'Comprehensive presentation and strategic analysis.', {
+      x: 1.2, y: 3.90, w: 10.9, h: 0.65,
+      fontSize: 14.5, color: TEXT_BODY, fontFace: 'Calibri',
+      valign: 'top', wrap: true
+    });
+
+    // Divider Line
+    titleSlide.addShape(pptx.shapes.RECTANGLE, {
+      x: 0.9, y: 4.95, w: 11.533, h: 0.01,
+      fill: { color: CARD_BORDER }, line: { color: CARD_BORDER }
+    });
+
+    // 4 Metadata KPI Cards
+    const kpiData = [
+      { label: 'TARGET AUDIENCE', val: presData.audience || 'Executive Stakeholders' },
+      { label: 'PRESENTATION DECK', val: `${(presData.slides || []).length} Strategic Slides` },
+      { label: 'ESTIMATED PACING', val: `~${presData.duration || 15} Minutes` },
+      { label: 'COMPLEXITY LEVEL', val: presData.difficulty || 'Intermediate' }
+    ];
+
+    const cardW = 2.70;
+    const cardGap = 0.244;
+    kpiData.forEach((kpi, idx) => {
+      const cardX = 0.9 + idx * (cardW + cardGap);
+      titleSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+        x: cardX, y: 5.15, w: cardW, h: 1.35,
+        fill: { color: CARD_BG }, line: { color: CARD_BORDER, width: 1 }
+      });
+      titleSlide.addText(kpi.label, {
+        x: cardX + 0.2, y: 5.30, w: cardW - 0.4, h: 0.25,
+        fontSize: 8.5, bold: true, color: EMERALD, fontFace: 'Calibri'
+      });
+      titleSlide.addText(kpi.val, {
+        x: cardX + 0.2, y: 5.60, w: cardW - 0.4, h: 0.70,
+        fontSize: 13, bold: true, color: TEXT_WHITE, fontFace: 'Calibri',
+        valign: 'top', wrap: true
+      });
+    });
+
+    // Title Slide Footer
+    titleSlide.addText('CONFIDENTIAL   •   ENTERPRISE PRESENTATION PACKAGE   •   GENERATED VIA PRESENTAI STUDIO', {
+      x: 0.9, y: 6.80, w: 11.533, h: 0.35,
+      fontSize: 9, color: TEXT_DIM, fontFace: 'Calibri', align: 'center', valign: 'middle'
+    });
+
+    // ==========================================
+    // 2. CONTENT SLIDES (Full Widescreen 16:9)
+    // ==========================================
+    const totalSlides = (presData.slides || []).length;
+    (presData.slides || []).forEach((slide, sIdx) => {
+      const s = pptx.addSlide();
+      s.background = { color: BG_COLOR };
+
+      const slideNumStr = String(slide.slide_number || sIdx + 1).padStart(2, '0');
+      const pacingMin = (slide.time_minutes || 1.5).toFixed(1);
+
+      // Top Navigation / Header Bar
+      // 1. Slide Number Pill
+      s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+        x: 0.9, y: 0.45, w: 1.4, h: 0.32,
+        fill: { color: EMERALD_DARK }, line: { color: EMERALD, width: 1 }
+      });
+      s.addText(`SLIDE ${slideNumStr}`, {
+        x: 0.9, y: 0.45, w: 1.4, h: 0.32,
+        fontSize: 9.5, bold: true, color: EMERALD, fontFace: 'Calibri',
+        align: 'center', valign: 'middle'
+      });
+
+      // 2. Topic Breadcrumb
+      s.addText(`${(presData.topic || '').toUpperCase()}   /   PART ${slideNumStr}`, {
+        x: 2.45, y: 0.45, w: 7.2, h: 0.32,
+        fontSize: 9.5, bold: true, color: TEXT_DIM, fontFace: 'Calibri',
+        valign: 'middle'
+      });
+
+      // 3. Pacing Badge Pill
+      s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+        x: 10.533, y: 0.45, w: 1.9, h: 0.32,
+        fill: { color: '1E293B' }, line: { color: '334155', width: 1 }
+      });
+      s.addText(`⏱️ ~${pacingMin} MIN`, {
+        x: 10.533, y: 0.45, w: 1.9, h: 0.32,
+        fontSize: 9.5, bold: true, color: TEXT_MUTED, fontFace: 'Calibri',
+        align: 'center', valign: 'middle'
+      });
+
+      // Slide Title (Clean typography & wrapping)
+      s.addText(slide.title, {
+        x: 0.9, y: 0.82, w: 11.533, h: 0.78,
+        fontSize: 22, bold: true, color: TEXT_WHITE, fontFace: 'Calibri',
+        valign: 'middle', wrap: true
+      });
+
+      // Clean purpose line without redundant "Purpose:" prefix
+      const cleanPurpose = slide.purpose ? slide.purpose.replace(/^(purpose:\s*)/i, '') : '';
+      if (cleanPurpose) {
+        s.addText(cleanPurpose, {
+          x: 0.9, y: 1.64, w: 11.533, h: 0.32,
+          fontSize: 12, italic: true, color: TEXT_MUTED, fontFace: 'Calibri',
+          valign: 'top', wrap: true
+        });
+      }
+
+      // Header Divider Line
+      s.addShape(pptx.shapes.RECTANGLE, {
+        x: 0.9, y: 2.04, w: 11.533, h: 0.01,
+        fill: { color: CARD_BORDER }, line: { color: CARD_BORDER }
+      });
+
+      // Content Body Layout
+      const hasCaseStudy = Boolean(slide.case_study && slide.case_study.trim().length > 0);
+
+      if (hasCaseStudy) {
+        // 2-COLUMN BALANCED LAYOUT
+        const leftW = 6.9;
+        const rightW = 4.4;
+        const bodyH = 4.45;
+        const bodyY = 2.16;
+
+        // Left Column Card (Key Discussion Points)
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: 0.9, y: bodyY, w: leftW, h: bodyH,
+          fill: { color: CARD_BG }, line: { color: CARD_BORDER, width: 1 }
+        });
+
+        // Left Column Pill Header
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: 1.2, y: bodyY + 0.25, w: 3.2, h: 0.32,
+          fill: { color: '162238' }, line: { color: SKY_BLUE, width: 1 }
+        });
+        s.addText('KEY DISCUSSION POINTS', {
+          x: 1.2, y: bodyY + 0.25, w: 3.2, h: 0.32,
+          fontSize: 9.5, bold: true, color: SKY_BLUE, fontFace: 'Calibri',
+          align: 'center', valign: 'middle'
+        });
+
+        // Left Column Bullets
+        const bullets = slide.bullets || [];
+        const fontSize = bullets.length <= 3 ? 14.5 : (bullets.length === 4 ? 13.5 : 12.5);
+        const lineSpacing = bullets.length <= 3 ? 28 : (bullets.length === 4 ? 24 : 21);
+
+        const bulletObjs = bullets.map(b => ({
+          text: b,
+          options: {
+            fontSize: fontSize,
+            color: TEXT_BODY,
+            bullet: true,
+            breakLine: true,
+            fontFace: 'Calibri',
+            spacing: { line: lineSpacing }
+          }
+        }));
+
+        s.addText(bulletObjs, {
+          x: 1.2, y: bodyY + 0.75, w: leftW - 0.6, h: bodyH - 1.6,
+          valign: 'top', wrap: true
+        });
+
+        // Left Card Bottom Pill: Strategic Takeaway Focus
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: 1.2, y: bodyY + bodyH - 0.75, w: leftW - 0.6, h: 0.45,
+          fill: { color: '141E2F' }, line: { color: '20334D', width: 1 }
+        });
+        s.addText('💡 Core Focus: Structured Architectural & Operational Alignment', {
+          x: 1.2, y: bodyY + bodyH - 0.75, w: leftW - 0.6, h: 0.45,
+          fontSize: 9, bold: true, color: SKY_BLUE, fontFace: 'Calibri',
+          align: 'center', valign: 'middle'
+        });
+
+        // Right Column Card (Applied Case Study)
+        const rightX = 0.9 + leftW + 0.233;
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: rightX, y: bodyY, w: rightW, h: bodyH,
+          fill: { color: CASE_BG }, line: { color: EMERALD, width: 1.5 }
+        });
+
+        // Right Column Pill Header
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: rightX + 0.25, y: bodyY + 0.25, w: 3.6, h: 0.32,
+          fill: { color: '123828' }, line: { color: EMERALD, width: 1 }
+        });
+        s.addText('APPLIED CASE STUDY / IMPACT', {
+          x: rightX + 0.25, y: bodyY + 0.25, w: 3.6, h: 0.32,
+          fontSize: 9.5, bold: true, color: EMERALD, fontFace: 'Calibri',
+          align: 'center', valign: 'middle'
+        });
+
+        // Right Column Body Text
+        s.addText(slide.case_study, {
+          x: rightX + 0.3, y: bodyY + 0.80, w: rightW - 0.6, h: bodyH - 1.65,
+          fontSize: 13.5, color: TEXT_BODY, fontFace: 'Calibri',
+          valign: 'top', wrap: true, spacing: { line: 23 }
+        });
+
+        // Right Card Bottom Pill: Industry Verification
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: rightX + 0.3, y: bodyY + bodyH - 0.75, w: rightW - 0.6, h: 0.45,
+          fill: { color: '112920' }, line: { color: '1A4A38', width: 1 }
+        });
+        s.addText('✓ Verified Industry Implementation Benchmark', {
+          x: rightX + 0.3, y: bodyY + bodyH - 0.75, w: rightW - 0.6, h: 0.45,
+          fontSize: 9, bold: true, color: EMERALD, fontFace: 'Calibri',
+          align: 'center', valign: 'middle'
+        });
+
+      } else {
+        // FULL-WIDTH CARD LAYOUT (When no case study)
+        const bodyW = 11.533;
+        const bodyH = 4.45;
+        const bodyY = 2.16;
+
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: 0.9, y: bodyY, w: bodyW, h: bodyH,
+          fill: { color: CARD_BG }, line: { color: CARD_BORDER, width: 1 }
+        });
+
+        s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+          x: 1.2, y: bodyY + 0.25, w: 3.2, h: 0.32,
+          fill: { color: '162238' }, line: { color: SKY_BLUE, width: 1 }
+        });
+        s.addText('KEY DISCUSSION POINTS', {
+          x: 1.2, y: bodyY + 0.25, w: 3.2, h: 0.32,
+          fontSize: 9.5, bold: true, color: SKY_BLUE, fontFace: 'Calibri',
+          align: 'center', valign: 'middle'
+        });
+
+        const bullets = slide.bullets || [];
+        const bulletObjs = bullets.map(b => ({
+          text: b,
+          options: {
+            fontSize: 14.5,
+            color: TEXT_BODY,
+            bullet: true,
+            breakLine: true,
+            fontFace: 'Calibri',
+            spacing: { line: 28 }
+          }
+        }));
+
+        s.addText(bulletObjs, {
+          x: 1.2, y: bodyY + 0.85, w: bodyW - 0.6, h: bodyH - 1.1,
+          valign: 'top', wrap: true
+        });
+      }
+
+      // Slide Footer Bar
+      s.addShape(pptx.shapes.RECTANGLE, {
+        x: 0.9, y: 6.75, w: 11.533, h: 0.01,
+        fill: { color: CARD_BORDER }, line: { color: CARD_BORDER }
+      });
+
+      s.addText(`PresentAI Studio   •   ${presData.topic}`, {
+        x: 0.9, y: 6.82, w: 6.0, h: 0.30,
+        fontSize: 9, color: TEXT_DIM, fontFace: 'Calibri', valign: 'middle'
+      });
+
+      s.addText(`Slide ${sIdx + 1} of ${totalSlides}`, {
+        x: 7.0, y: 6.82, w: 5.433, h: 0.30,
+        fontSize: 9, bold: true, color: TEXT_MUTED, fontFace: 'Calibri',
+        align: 'right', valign: 'middle'
+      });
+
+      // Embedded Speaker Notes
+      const notesParts = [
+        `--- SLIDE ${slideNumStr}: ${slide.title} ---`,
+        `Allocated Pacing: ~${pacingMin} min`,
+        cleanPurpose ? `Slide Purpose: ${cleanPurpose}` : null,
+        slide.speaker_notes ? `\nPRESENTER NOTES:\n${slide.speaker_notes}` : null,
+        slide.case_study ? `\nCASE STUDY DISCUSSION:\n${slide.case_study}` : null
+      ].filter(Boolean);
+
+      s.addNotes(notesParts.join('\n\n'));
+    });
+
+    // ==========================================
+    // 3. CONCLUSION / SUMMARY SLIDE
+    // ==========================================
+    const endSlide = pptx.addSlide();
+    endSlide.background = { color: BG_COLOR };
+
+    endSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 0.9, y: 0.45, w: 2.2, h: 0.32,
+      fill: { color: EMERALD_DARK }, line: { color: EMERALD, width: 1 }
+    });
+    endSlide.addText('CONCLUSION & WRAP-UP', {
+      x: 0.9, y: 0.45, w: 2.2, h: 0.32,
+      fontSize: 9.5, bold: true, color: EMERALD, fontFace: 'Calibri',
+      align: 'center', valign: 'middle'
+    });
+
+    endSlide.addText('Executive Summary & Strategic Next Steps', {
+      x: 0.9, y: 0.88, w: 11.533, h: 0.70,
+      fontSize: 24, bold: true, color: TEXT_WHITE, fontFace: 'Calibri',
       valign: 'middle'
     });
 
-    // Objective Subtitle
-    titleSlide.addText(presData.objective || '', {
-      x: 0.8, y: 3.8, w: 11.0, h: 1.2,
-      fontSize: 16, color: '94A3B8', fontFace: 'Calibri'
+    endSlide.addShape(pptx.shapes.RECTANGLE, {
+      x: 0.9, y: 1.65, w: 11.533, h: 0.01,
+      fill: { color: CARD_BORDER }, line: { color: CARD_BORDER }
     });
 
-    // Metadata Bar
-    titleSlide.addText(`Audience: ${presData.audience}   |   ${presData.num_slides} Slides   |   Duration: ~${presData.duration} Mins   |   Difficulty: ${presData.difficulty}`, {
-      x: 0.8, y: 6.2, w: 11.5, h: 0.4,
-      fontSize: 11, color: '64748B', fontFace: 'Calibri'
+    // Summary Card Left
+    endSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 0.9, y: 1.85, w: 5.65, h: 4.70,
+      fill: { color: CARD_BG }, line: { color: CARD_BORDER, width: 1 }
+    });
+    endSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 1.2, y: 2.10, w: 3.2, h: 0.32,
+      fill: { color: '162238' }, line: { color: SKY_BLUE, width: 1 }
+    });
+    endSlide.addText('CORE STRATEGIC TAKEAWAYS', {
+      x: 1.2, y: 2.10, w: 3.2, h: 0.32,
+      fontSize: 9.5, bold: true, color: SKY_BLUE, fontFace: 'Calibri',
+      align: 'center', valign: 'middle'
+    });
+    endSlide.addText([
+      { text: 'Comprehensive end-to-end framework aligned with organizational goals.', options: { bullet: true, breakLine: true, spacing: { line: 26 }, fontSize: 13.5, color: TEXT_BODY } },
+      { text: 'Empirically supported architecture validated through industry case studies.', options: { bullet: true, breakLine: true, spacing: { line: 26 }, fontSize: 13.5, color: TEXT_BODY } },
+      { text: 'High pacing efficiency targeted for stakeholder clarity and alignment.', options: { bullet: true, breakLine: true, spacing: { line: 26 }, fontSize: 13.5, color: TEXT_BODY } }
+    ], {
+      x: 1.2, y: 2.65, w: 5.05, h: 3.6, valign: 'top'
     });
 
-    // 2. Content Slides
-    (presData.slides || []).forEach(slide => {
-      const s = pptx.addSlide();
-      s.background = { color: '0A0E17' };
+    // Summary Card Right
+    endSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 6.783, y: 1.85, w: 5.65, h: 4.70,
+      fill: { color: CASE_BG }, line: { color: EMERALD, width: 1.2 }
+    });
+    endSlide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
+      x: 7.083, y: 2.10, w: 3.2, h: 0.32,
+      fill: { color: '123828' }, line: { color: EMERALD, width: 1 }
+    });
+    endSlide.addText('Q&A / DISCUSSION FORUM', {
+      x: 7.083, y: 2.10, w: 3.2, h: 0.32,
+      fontSize: 9.5, bold: true, color: EMERALD, fontFace: 'Calibri',
+      align: 'center', valign: 'middle'
+    });
+    endSlide.addText([
+      { text: `Target Audience: ${presData.audience || 'Executive Stakeholders'}`, options: { bullet: true, breakLine: true, spacing: { line: 24 }, fontSize: 13.5, color: TEXT_BODY } },
+      { text: `Session Duration: ~${presData.duration || 15} minutes scheduled`, options: { bullet: true, breakLine: true, spacing: { line: 24 }, fontSize: 13.5, color: TEXT_BODY } },
+      { text: 'Open for executive inquiry, operational alignment, and deployment roadmap.', options: { bullet: true, breakLine: true, spacing: { line: 24 }, fontSize: 13.5, color: TEXT_BODY } }
+    ], {
+      x: 7.083, y: 2.65, w: 5.05, h: 3.6, valign: 'top'
+    });
 
-      // Slide Header Badge
-      s.addText(`SLIDE ${String(slide.slide_number).padStart(2, '0')}`, {
-        x: 0.8, y: 0.4, w: 2.0, h: 0.35,
-        fontSize: 11, bold: true, color: '10B981', fontFace: 'Calibri'
-      });
-
-      // Pacing Badge
-      s.addText(`⏱️ ~${(slide.time_minutes || 1.5).toFixed(1)} min`, {
-        x: 10.2, y: 0.4, w: 2.3, h: 0.35,
-        fontSize: 11, color: '94A3B8', fontFace: 'Calibri', align: 'right'
-      });
-
-      // Title
-      s.addText(slide.title, {
-        x: 0.8, y: 0.8, w: 11.7, h: 0.7,
-        fontSize: 22, bold: true, color: 'FFFFFF', fontFace: 'Calibri'
-      });
-
-      // Purpose
-      s.addText(slide.purpose || '', {
-        x: 0.8, y: 1.5, w: 11.7, h: 0.4,
-        fontSize: 12, italic: true, color: '94A3B8', fontFace: 'Calibri'
-      });
-
-      // Left Column: Key Bullet Points Card
-      s.addShape(pptx.shapes.RECTANGLE, {
-        x: 0.8, y: 2.1, w: 6.6, h: 4.6,
-        fill: { color: '111827' },
-        line: { color: '1F2937', width: 1 }
-      });
-
-      s.addText("KEY DISCUSSION POINTS", {
-        x: 1.1, y: 2.3, w: 6.0, h: 0.3,
-        fontSize: 10, bold: true, color: '10B981', fontFace: 'Calibri'
-      });
-
-      const bulletObjs = (slide.bullets || []).map(b => ({
-        text: b,
-        options: {
-          fontSize: 13,
-          color: 'E2E8F0',
-          bullet: true,
-          breakLine: true,
-          fontFace: 'Calibri',
-          spacing: { line: 24 }
-        }
-      }));
-
-      s.addText(bulletObjs, {
-        x: 1.1, y: 2.7, w: 6.0, h: 3.8,
-        valign: 'top'
-      });
-
-      // Right Column: Case Study Box
-      if (slide.case_study) {
-        s.addShape(pptx.shapes.RECTANGLE, {
-          x: 7.7, y: 2.1, w: 4.8, h: 4.6,
-          fill: { color: '14221E' },
-          line: { color: '10B981', width: 1.5 }
-        });
-
-        s.addText("APPLIED CASE STUDY / REAL-WORLD IMPACT", {
-          x: 8.0, y: 2.3, w: 4.2, h: 0.3,
-          fontSize: 10, bold: true, color: 'F59E0B', fontFace: 'Calibri'
-        });
-
-        s.addText(slide.case_study, {
-          x: 8.0, y: 2.8, w: 4.2, h: 3.6,
-          fontSize: 13, color: 'CBD5E1', fontFace: 'Calibri',
-          valign: 'top', spacing: { line: 20 }
-        });
-      }
-
-      // Speaker Notes
-      if (slide.speaker_notes) {
-        s.addNotes(slide.speaker_notes);
-      }
+    // Footer
+    endSlide.addShape(pptx.shapes.RECTANGLE, {
+      x: 0.9, y: 6.75, w: 11.533, h: 0.01,
+      fill: { color: CARD_BORDER }, line: { color: CARD_BORDER }
+    });
+    endSlide.addText('THANK YOU   •   QUESTIONS & STRATEGIC DISCUSSION', {
+      x: 0.9, y: 6.82, w: 11.533, h: 0.30,
+      fontSize: 9.5, bold: true, color: EMERALD, fontFace: 'Calibri',
+      align: 'center', valign: 'middle'
     });
 
     // Write file directly to browser download

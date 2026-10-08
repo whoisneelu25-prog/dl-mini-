@@ -27,7 +27,7 @@ logger = logging.getLogger("server")
 app = FastAPI(
     title="AI Presentation Generator API",
     description="Sequence-to-Sequence Outline Generation using FLAN-T5 & Sentence-BERT",
-    version="1.0.0",
+    version="1.1.0",
 )
 
 # Enable CORS for frontend flexibility

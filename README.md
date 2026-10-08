@@ -1,6 +1,7 @@
 # AI Presentation Generator
 ### AI-Powered Presentation Outline Generation Using Deep Learning and Natural Language Processing
 
+[![Release](https://img.shields.io/badge/version-v1.1.0-blue.svg)]()
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.2%2B-orange.svg)](https://pytorch.org/)
 [![Transformers](https://img.shields.io/badge/Transformers-FLAN--T5--base-green.svg)](https://huggingface.co/google/flan-t5-base)
